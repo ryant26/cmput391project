@@ -33,11 +33,26 @@
         <div class="form-menu">
             <h2 class="form-heading">Main Menu:</h2>
             <div class="list-group">
-                <a href="#" class="list-group-item">Cras justo odio</a>
-                <a href="#" class="list-group-item">Dapibus ac facilisis in</a>
-                <a href="#" class="list-group-item">Morbi leo risus</a>
-                <a href="#" class="list-group-item">Porta ac consectetur ac</a>
-                <a href="#" class="list-group-item">Vestibulum at eros</a>
+                <%
+                String userClass = (String) session.getAttribute("class");
+                try{
+                    if (userClass.equals("a")){ %>
+
+                        <a href="#" class="list-group-item">User Managment</a>
+                        <a href="#" class="list-group-item">Report Generation</a>
+                        <a href="#" class="list-group-item">Data Analysis</a>
+                    
+                    <%} else if (userClass.equals("r")){ %>
+                        <a href="#" class="list-group-item">Upload Image</a>
+                    <%  } %>
+                    
+                        <a href="#" class="list-group-item">Search Module</a>
+                        <a href="#" class="list-group-item">Modify Account</a>        
+                    
+             <% } catch (NullPointerException e){
+                    response.sendError(HttpServletResponse.SC_FORBIDDEN);
+                }
+                %>
             </div>
         </div>
     </body>
