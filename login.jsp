@@ -29,14 +29,14 @@
   </head>
 
   <body>
-	<%@ page import="java.sql.*, Database"%>
+	<%@ page import="java.sql.*, db.Database"%>
 	<%
 		if (request.getParameter("submit") != null){
 			
 			//Get Input
 			String username = (request.getParameter("inputUsername")).trim();
       String password = (request.getParameter("inputPassword")).trim();
-
+      
       Connection conn = Database.getConnection();
       String query = "select password, class, person_id from users where user_name = '" + username + "'";
       ResultSet results = null;
@@ -49,7 +49,7 @@
         stmt = conn.createStatement();
         results = stmt.executeQuery(query);
 
-        while (results != null && results.next){
+        while (results != null && results.next()){
           storedPass = (results.getString(1)).trim();
           userClass = (results.getString(2)).trim();
           pID = (results.getString(3)).trim();
@@ -67,11 +67,20 @@
         session.setAttribute("class", userClass);
         session.setAttribute("p_id", pID);
         response.setHeader("Refresh", "3;url=menu.jsp");
-      } else {
+      } else { %>
         //No account match
-        //TODO bootstrap error prompt
-      }
-		} else {
+        <div class="alert alert-danger alert-dismissible fade in" role="alert">
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
+          <h4 id="oh-snap!-you-got-an-error!">Oh snap! You got an error!<a class="anchorjs-link" href="#oh-snap!-you-got-an-error!"><span class="anchorjs-icon"></span></a></h4>
+          <p>Change this and that and try again. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Cras mattis consectetur purus sit amet fermentum.</p>
+          <p>
+            <button type="button" class="btn btn-danger">Take this action</button>
+            <button type="button" class="btn btn-default">Or do this</button>
+          </p>
+        </div>
+
+     <% }
+		}
 	%>
     <div class="container">
 
@@ -89,6 +98,5 @@
 
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
-  <% } %>
   </body>
 </html>
