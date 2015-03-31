@@ -29,20 +29,58 @@
   </head>
 
   <body>
+	<%@ page import="java.sql.*, Database"%>
+	<%
+		if (request.getParameter("submit") != null){
+			
+			//Get Input
+			String username = (request.getParameter("inputUsername")).trim();
+      String password = (request.getParameter("inputPassword")).trim();
 
+      Connection conn = Database.getConnection();
+      String query = "select password, class, person_id from users where user_name = '" + username + "'";
+      ResultSet results = null;
+      Statement stmt = null;
+
+      String storedPass = "";
+      String userClass = "";
+      String pID = "";
+      try{
+        stmt = conn.createStatement();
+        results = stmt.executeQuery(query);
+
+        while (results != null && results.next){
+          storedPass = (results.getString(1)).trim();
+          userClass = (results.getString(2)).trim();
+          pID = (results.getString(3)).trim();
+        }
+      } catch (Exception e){
+          System.out.println("Error In Login: " + e.getMessage());
+      } finally {
+          Database.close(conn);
+      }
+
+      if (password.equals(storedPass)){
+        //Account match
+        out.println("<p><b>Your Login is Successful! Welcome, "+ username +"</b></p>");
+        session.setAttribute("username", username);
+        session.setAttribute("class", userClass);
+        session.setAttribute("p_id", pID);
+        response.setHeader("Refresh", "3;url=menu.jsp");
+      } else {
+        //No account match
+        //TODO bootstrap error prompt
+      }
+		} else {
+	%>
     <div class="container">
 
       <form class="form-signin">
-        <h2 class="form-signin-heading">Please sign in</h2>
-        <label for="inputEmail" class="sr-only">Email address</label>
-        <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
+        <h2 class="form-signin-heading">Radiology Login</h2>
+        <label for="inputUsername" class="sr-only">Username</label>
+        <input type="text" id="inputUsername" class="form-control" placeholder="Email address" required autofocus>
         <label for="inputPassword" class="sr-only">Password</label>
         <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
-        <div class="checkbox">
-          <label>
-            <input type="checkbox" value="remember-me"> Remember me
-          </label>
-        </div>
         <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
       </form>
 
@@ -51,5 +89,6 @@
 
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
+  <% } %>
   </body>
 </html>
