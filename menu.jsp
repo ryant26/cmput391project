@@ -46,8 +46,8 @@
                         <a href="#" class="list-group-item">Upload Image</a>
                     <%  } %>
                     
-                        <a href="#" class="list-group-item">Search Module</a>
-                        <a href="#" class="list-group-item">Modify Account</a>        
+                    <a href="#" class="list-group-item">Search Module</a>
+                    <a href="#" class="list-group-item">Modify Account</a>        
                     
              <% } catch (NullPointerException e){
                     response.sendError(HttpServletResponse.SC_FORBIDDEN);
