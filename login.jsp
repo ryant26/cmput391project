@@ -13,6 +13,8 @@
 
     <!-- Bootstrap core CSS -->
     <link href="./dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <link href="./dist/css/bootstrap-theme.min.css" rel="stylesheet">
 
     <!-- Custom styles for this template -->
     <link href="./resc/signin.css" rel="stylesheet">
@@ -20,7 +22,7 @@
     <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
     <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
     <script src="../../assets/js/ie-emulation-modes-warning.js"></script>
-
+    <script src="./dist/js/bootstrap.min.js"></script>
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
@@ -32,7 +34,6 @@
 	<%@ page import="java.sql.*, db.Database"%>
 	<%
 		if (request.getParameter("bSubmit") != null){
-			
 			//Get Input
 			String username = (request.getParameter("inputUsername")).trim();
       String password = (request.getParameter("inputPassword")).trim();
@@ -66,7 +67,7 @@
         //Account match
         out.println("<p><b>Your Login is Successful! Welcome, "+ username +"</b></p>");
         session.setAttribute("username", username);
-        session.setAttribute("class", userClass);
+        session.setAttribute("class", userClass); 
         session.setAttribute("p_id", pID);
         response.setHeader("Refresh", "3;url=menu.jsp");
       } else { %>
@@ -83,7 +84,7 @@
       <form class="form-signin">
         <h2 class="form-signin-heading">Radiology Login</h2>
         <label for="inputUsername" class="sr-only">Username</label>
-        <input type="text" id="inputUsername" name="inputUsername" class="form-control" placeholder="Email address" required autofocus>
+        <input type="text" id="inputUsername" name="inputUsername" class="form-control" placeholder="Username" required autofocus>
         <label for="inputPassword" class="sr-only">Password</label>
         <input type="password" id="inputPassword" name="inputPassword" class="form-control" placeholder="Password" required>
         <button class="btn btn-lg btn-primary btn-block" type="submit" name="bSubmit">Sign in</button>
@@ -91,6 +92,5 @@
     </div> <!-- /container -->  
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
-    <script src="./dist/js/bootstrap.min.js"></script>
   </body>
 </html>
