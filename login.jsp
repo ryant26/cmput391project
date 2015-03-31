@@ -31,13 +31,14 @@
   <body>
 	<%@ page import="java.sql.*, db.Database"%>
 	<%
-		if (request.getParameter("submit") != null){
+		if (request.getParameter("bSubmit") != null){
 			
 			//Get Input
 			String username = (request.getParameter("inputUsername")).trim();
       String password = (request.getParameter("inputPassword")).trim();
-      
-      Connection conn = Database.getConnection();
+      System.out.println("Before");
+      Database db = new Database();
+      Connection conn = db.getConnection();
       String query = "select password, class, person_id from users where user_name = '" + username + "'";
       ResultSet results = null;
       Statement stmt = null;
@@ -45,6 +46,7 @@
       String storedPass = "";
       String userClass = "";
       String pID = "";
+      
       try{
         stmt = conn.createStatement();
         results = stmt.executeQuery(query);
@@ -57,7 +59,7 @@
       } catch (Exception e){
           System.out.println("Error In Login: " + e.getMessage());
       } finally {
-          Database.close(conn);
+          db.close();
       }
 
       if (password.equals(storedPass)){
@@ -68,18 +70,12 @@
         session.setAttribute("p_id", pID);
         response.setHeader("Refresh", "3;url=menu.jsp");
       } else { %>
-        //No account match
         <div class="alert alert-danger alert-dismissible fade in" role="alert">
           <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
-          <h4 id="oh-snap!-you-got-an-error!">Oh snap! You got an error!<a class="anchorjs-link" href="#oh-snap!-you-got-an-error!"><span class="anchorjs-icon"></span></a></h4>
-          <p>Change this and that and try again. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Cras mattis consectetur purus sit amet fermentum.</p>
-          <p>
-            <button type="button" class="btn btn-danger">Take this action</button>
-            <button type="button" class="btn btn-default">Or do this</button>
-          </p>
+          <h4 id="Login Unseccessful">Login Unseccessful</h4>
+          <p>Please re-enter your login details and try again</p>
         </div>
-
-     <% }
+      <%}
 		}
 	%>
     <div class="container">
@@ -87,16 +83,14 @@
       <form class="form-signin">
         <h2 class="form-signin-heading">Radiology Login</h2>
         <label for="inputUsername" class="sr-only">Username</label>
-        <input type="text" id="inputUsername" class="form-control" placeholder="Email address" required autofocus>
+        <input type="text" id="inputUsername" name="inputUsername" class="form-control" placeholder="Email address" required autofocus>
         <label for="inputPassword" class="sr-only">Password</label>
-        <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
-        <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+        <input type="password" id="inputPassword" name="inputPassword" class="form-control" placeholder="Password" required>
+        <button class="btn btn-lg btn-primary btn-block" type="submit" name="bSubmit">Sign in</button>
       </form>
-
-    </div> <!-- /container -->
-
-
+    </div> <!-- /container -->  
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
+    <script src="./dist/js/bootstrap.min.js"></script>
   </body>
 </html>
