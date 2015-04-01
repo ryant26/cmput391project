@@ -12,6 +12,10 @@ $(document).ready(function() {
     $('#lastname').editable();    
     $('#address').editable();    
     $('#email').editable();    
-    $('#phone').editable();    
+    $('#phone').editable();  
+
+    $('#doctorid').editable();    
+    $('#patientid').editable();    
+
 
 });

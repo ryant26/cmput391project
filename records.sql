@@ -14,6 +14,8 @@ INSERT INTO persons (person_id, first_name, last_name, address, email, phone) VA
 
 INSERT INTO persons (person_id, first_name, last_name, address, email, phone) VALUES (9, 'rad', 'ologis', '143 Street', 'radio@mail.com', '3333333333');
 
+INSERT INTO persons values (10, 'Bob', 'Smith', '123 apple st.', 'Bob@bob.ca', '4039912288');
+
 insert into radiology_record(record_id,patient_id,doctor_id,radiologist_id,test_type,prescribing_date,test_date,diagnosis, description) values(1, 2, 5, 8, 'X-Ray', to_date('02/01/2012', 'DD/MM/YYYY'), to_date('02/01/2014', 'DD/MM/YYYY'), 'Rib Fracture', 'Two rib bones on right side');
 
 insert into radiology_record(record_id,patient_id,doctor_id,radiologist_id,test_type,prescribing_date,test_date,diagnosis, description) values(2, 2, 6, 9, 'Ultra Sound', to_date('31/03/2014', 'DD/MM/YYYY'), to_date('31/03/2014', 'DD/MM/YYYY'), 'Tumor', 'Stomach Tumor of 2 cm');
@@ -26,3 +28,8 @@ insert into radiology_record(record_id,patient_id,doctor_id,radiologist_id,test_
 
 insert into radiology_record(record_id,patient_id,doctor_id,radiologist_id,test_type,prescribing_date,test_date,diagnosis, description) values(6, 4, 5, 9, 'MRI', to_date('23/03/2014', 'DD/MM/YYYY'), to_date('23/03/2014', 'DD/MM/YYYY'), 'Stone', 'Inside Gall Bladder');
 
+INSERT INTO users values('admin', 'admin', 'a', 1, TO_DATE('2003/05/03 21:02:44', 'yyyy/mm/dd hh24:mi:ss'));
+
+INSERT INTO family_doctor values(4, 1);
+
+INSERT INTO family_doctor values(4, 3);

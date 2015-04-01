@@ -49,7 +49,7 @@
 		<!-- Tab panes -->
 
 	  <div class="tab-content">
-	    <div role="tabpanel" class="tab-pane" id="Users">
+	    <div role="tabpanel" class="tab-pane active" id="Users">
     		<div class="panel panel-default">
 			  <div class="panel-body">
 			    <div class="container">
@@ -103,7 +103,7 @@
 			  </div>
 			</div>
 	    </div>
-	    <div role="tabpanel" class="tab-pane  active" id="Persons">
+	    <div role="tabpanel" class="tab-pane" id="Persons">
 	    	<div class="panel panel-default">
 			  <div class="panel-body">
 			    <div class="container">
@@ -160,7 +160,51 @@
 			  </div>
 			</div>
 	    </div>
-	    <div role="tabpanel" class="tab-pane" id="Family_doctor">...</div>
+	    <div role="tabpanel" class="tab-pane" id="Family_doctor">
+	    	<div class="panel panel-default">
+			  <div class="panel-body">
+			    <div class="container">
+				  <table class="table table-hover">
+				    <thead>
+				      <tr>
+						<th>Doctor ID</th>
+				        <th>Patient Name</th>
+				      </tr>
+				    </thead>
+				    <tbody>
+				    	<%
+				    		db = new Database();
+				    		conn = db.getConnection();
+				    		query = "SELECT * FROM family_doctor";
+				    		results = null;
+				    		stmt = null;
+
+				    		try{
+				    			stmt = conn.createStatement();
+				    			results = stmt.executeQuery(query);
+
+				    			while(results.next()){ 
+				    			String doctorID = results.getString(1);
+				    			String patientID = results.getString(2);
+				    			String pk = "\"" + doctorID + "\"";
+				    											%>
+				    				<tr>
+								        <td id="doctorid" data-type="text" data-url="#" data-title="Enter First Name" data-pk=<%out.println(pk);%>><%out.println(doctorID);%></td>
+								        <td id="patientid" data-type="text" data-url="#" data-title="Enter Last Name" data-pk=<%out.println(pk);%>><%out.println(patientID);%></td>
+								    </tr>
+				    		<%  }
+				    		} catch (Exception e){
+				    			System.out.println("Error getting data for family_dcotor Table: " + e.getMessage());
+				    		} finally {
+				    			db.close();
+				    		}
+				    	%>
+				    </tbody>
+				  </table>
+				</div>
+			  </div>
+			</div>
+	    </div>
 	  </div>
 	</div>
   </body>
