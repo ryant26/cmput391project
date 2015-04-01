@@ -14,9 +14,3 @@ nav {
 	background-color: white;
 }
 
-.tab-content {
-    display: none;
-}
-.tab-content:target {
-    display: block;
-}

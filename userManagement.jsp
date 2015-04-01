@@ -36,41 +36,54 @@
   </head>
   <body>
   	<h1>User Management</h1>
-  	<ul class="nav nav-tabs" role="tablist">
-	  <li role="presentation" class="active"><a href="#Users" role="tab" data-toggle="tab">Users</a></li>
-	  <li role="presentation"><a href="#Persons" role="tab" data-toggle="tab">Persons</a></li>
-	  <li role="presentation"><a href="#Family_doctor" role="tab" data-toggle="tab">Family_doctor</a></li>
-	</ul>
-	<div class="panel panel-default">
-	  <div class="panel-body">
-	    <div class="container">
-		  <table class="table table-hover">
-		    <thead>
-		      <tr>
-		        <th>Firstname</th>
-		        <th>Lastname</th>
-		        <th>Email</th>
-		      </tr>
-		    </thead>
-		    <tbody>
-		      <tr>
-		        <td id="username" data-type="text" data-url="#" data-title="Enter Name">John</td>
-		        <td>Doe</td>
-		        <td>john@example.com</td>
-		      </tr>
-		      <tr>
-		        <td>Mary</td>
-		        <td>Moe</td>
-		        <td>mary@example.com</td>
-		      </tr>
-		      <tr>
-		        <td>July</td>
-		        <td>Dooley</td>
-		        <td>july@example.com</td>
-		      </tr>
-		    </tbody>
-		  </table>
-		</div>
+
+  	<div role="tabpanel">
+	  	
+	  	<ul class="nav nav-tabs" role="tablist">
+		  <li role="presentation" class="active"><a href="#Users" aria-controls="Users" role="tab" data-toggle="tab">Users</a></li>
+		  <li role="presentation"><a href="#Persons" role="tab" aria-controls="Persons" data-toggle="tab">Persons</a></li>
+		  <li role="presentation"><a href="#Family_doctor" role="tab" aria-controls="Family_doctor" data-toggle="tab">Family_doctor</a></li>
+		
+		</ul>
+		<!-- Tab panes -->
+
+	  <div class="tab-content">
+	    <div role="tabpanel" class="tab-pane active" id="Users">
+    		<div class="panel panel-default">
+			  <div class="panel-body">
+			    <div class="container">
+				  <table class="table table-hover">
+				    <thead>
+				      <tr>
+				        <th>Firstname</th>
+				        <th>Lastname</th>
+				        <th>Email</th>
+				      </tr>
+				    </thead>
+				    <tbody>
+				      <tr>
+				        <td id="username" data-type="text" data-url="#" data-title="Enter Name">John</td>
+				        <td>Doe</td>
+				        <td>john@example.com</td>
+				      </tr>
+				      <tr>
+				        <td>Mary</td>
+				        <td>Moe</td>
+				        <td>mary@example.com</td>
+				      </tr>
+				      <tr>
+				        <td>July</td>
+				        <td>Dooley</td>
+				        <td>july@example.com</td>
+				      </tr>
+				    </tbody>
+				  </table>
+				</div>
+			  </div>
+			</div>
+	    </div>
+	    <div role="tabpanel" class="tab-pane" id="Persons">...</div>
+	    <div role="tabpanel" class="tab-pane" id="Family_doctor">...</div>
 	  </div>
 	</div>
   </body>
