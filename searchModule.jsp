@@ -141,13 +141,14 @@
       
 	<%
 		if (request.getParameter("search") != null) {
-			PreparedStatement doSearch;
+			Statement doSearch;
 			String startdate, enddate, keyword;
 			boolean hasDate = false;
 			boolean hasKeyword = false;
 		
 			//default search string
-			String searchStr = "SELECT score(1), score(2), score(3),score(4),(score(1) + score(2)*3 + score(3)*6 + score(4)*6)rank,diagnosis, description, (first_name || ' ' || last_name) patient_name, test_date, record_id FROM radiology_record join persons on person_id = patient_id WHERE ";
+			String searchStr1 = "SELECT ";
+			String searchStr2 = "diagnosis, description, (first_name || ' ' || last_name) patient_name, test_date, record_id FROM radiology_record join persons on person_id = patient_id WHERE ";
           	
 			if(!((startdate = request.getParameter("startdate")).equals(""))) {
 		  		out.println("<br>");
@@ -166,231 +167,110 @@
 			} else {
 		  		enddate = "9999-12-30";
 			}
-
+			
             if(!((keyword = request.getParameter("keyword")).equals(""))) {
 		  		out.println("<br>");
-      	  		out.println("Searching for keyword: " + keyword);
-      	 		out.println("<br>");	
+      	  		out.println("Searching for keyword(s): " + keyword);
+      	 		out.println("<br>");
 		  		hasKeyword = true;		  
             }
 
+			if (hasDate) {
+				searchStr2 += "to_char(test_date, 'YYYY-MM-DD') >= '" + startdate + "' and to_char(test_date, 'YYYY-MM-DD') <= '" + enddate + "'";
+				if (hasKeyword) {
+					searchStr2 += " and (";
+				}
+			}
+
 			if (hasKeyword) {
-		  		if (hasDate) {
-					//TODO: need to do some sort of security check
-					doSearch = m_con.prepareStatement(searchStr + "to_char(test_date, 'YYYY-MM-DD') >= ? and to_char(test_date, 'YYYY-MM-DD') <= ? and (contains(description, ?, 1) > 0 or contains(diagnosis, ?, 2) > 0 or contains(first_name, ?, 3) > 0 or contains(last_name, ?, 4) > 0) order by (score(1) + score(2)*3 + score(3)*6 + score(4)*6) desc");
+				String[] wordList = keyword.split(" ");	
+				int word = 0;
+				searchStr1 += "(";
+				for (int i = 0; i < wordList.length; i++) {
+					searchStr1 += "score(" + Integer.toString(word + 1)	+ ") + score(" + (word + 2) + ")*3+score(" + (word + 3) + ")*6 +score(" + (word + 4)	+ ")*6";
+					searchStr2 += "contains(description,'" + "%" + wordList[i]+ "%" +"', " + (word + 1) + ") > 0 or contains(diagnosis,'" + "%" +wordList[i]+ "%" +"',"+ (word + 2) +") > 0 or contains(first_name,'" + "%" + wordList[i] + "%" +"', "+ (word + 3) +") > 0 or contains(last_name,'" + "%" + wordList[i] + "%" + "', "+ (word + 4) +") > 0";
 
-        			doSearch.setString(1, startdate);
-					doSearch.setString(2, enddate);
-					doSearch.setString(3, "%" + keyword + "%");
-					doSearch.setString(4, "%" + keyword + "%");
-					doSearch.setString(5, "%" + keyword + "%");
-					doSearch.setString(6, "%" + keyword + "%");
-
-        			ResultSet rset2 = doSearch.executeQuery();
-					out.println("<table border=1>");
-					out.println("<tr>");
-					out.println("<th>Patient Name</th>");
-					out.println("<th>Diagnosis</th>");
-					out.println("<th>Description</th>");
-					out.println("<th>Test Date</th>");
-					out.println("<th>Score1</th>");
-					out.println("<th>Score2</th>");
-					out.println("<th>Score3</th>");
-					out.println("<th>Score4</th>");
-					out.println("<th>Rank</th>");
-			   		out.println("</tr>");
-	        		while(rset2.next()) {
-						out.println("<tr>");
-						out.println("<td>"); 
-						out.println(rset2.getString(8));
-						out.println("</td>");
-						out.println("<td>"); 
-						out.println(rset2.getString(7));
-						out.println("</td>");
-						out.println("<td>"); 
-						out.println(rset2.getString(6)); 
-						out.println("</td>");
-						out.println("<td>"); 
-						out.println(rset2.getString(9)); 
-						out.println("</td>");
-						out.println("<td>");
-						out.println(rset2.getObject(1));
-						out.println("</td>");
-						out.println("<td>");
-						out.println(rset2.getObject(2));
-						out.println("</td>");
-						out.println("<td>");
-						out.println(rset2.getObject(3));
-						out.println("</td>");
-						out.println("<td>");
-						out.println(rset2.getObject(4));
-						out.println("</td>");
-						out.println("<td>");
-						out.println(rset2.getObject(5));
-						out.println("</td>");
-						// Get the thumbnail images
-						try {
-							String sql_images = "select image_id from pacs_images where record_id = " + rset2.getObject("record_id");
-							Statement stmt_images = m_con.createStatement();
-						 	ResultSet rset_images = stmt_images.executeQuery(sql_images);
-							String image_id;
-
-							out.println("<td>");
-							while (rset_images != null && rset_images.next()) {
-								image_id = (rset_images.getObject(1)).toString();
-								// specify the servlet when thumbnail is clicked
-								out.println("<a href=\"/proj1/GetOnePic?regular" + image_id + "\" target=" + "_blank" + ">");
-								// display the thumbnail
-								out.println("<img src=\"/proj1/GetOnePic?thumbnail" + image_id + "\"></a>");
-							}
-							out.println("</td>");
-							rset_images.close();
-
-						} catch (Exception e) {
-							out.println(e.getMessage());
-						}
-					
-						out.println("</tr>");
-					} 
-					out.println("</table>");
-				} else {
-					//TODO: need to do some sort of security check
-					doSearch = m_con.prepareStatement(searchStr + "contains(description, ?, 1) > 0 or contains(diagnosis, ?, 2) > 0 or contains(first_name, ?, 3) > 0 or contains(last_name, ?, 4) > 0 order by score(1) + score(2)*3 + score(3)*6 + score(4)*6 desc");
-
-					doSearch.setString(1, "%" + keyword + "%");
-					doSearch.setString(2, "%" + keyword + "%");
-					doSearch.setString(3, "%" + keyword + "%");
-					doSearch.setString(4, "%" + keyword + "%");
-
-					ResultSet rset2 = doSearch.executeQuery();
-					out.println("<table border=1>");
-					out.println("<tr>");
-					out.println("<th>Patient Name</th>");
-					out.println("<th>Diagnosis</th>");
-					out.println("<th>Description</th>");
-					out.println("<th>Test Date</th>");
-					out.println("<th>Score1</th>");
-					out.println("<th>Score2</th>");
-					out.println("<th>Score3</th>");
-					out.println("<th>Score4</th>");
-					out.println("<th>Rank</th>");
-					out.println("<th>Image</th>");
-					out.println("</tr>");
-					while(rset2.next()) {
-						out.println("<tr>");
-						out.println("<td>"); 
-						out.println(rset2.getString(8));
-						out.println("</td>");
-						out.println("<td>"); 
-						out.println(rset2.getString(7));
-						out.println("</td>");
-						out.println("<td>"); 
-						out.println(rset2.getString(6)); 
-						out.println("</td>");
-						out.println("<td>"); 
-						out.println(rset2.getString(9)); 
-						out.println("</td>");
-						out.println("<td>");
-						out.println(rset2.getObject(1));
-						out.println("</td>");
-						out.println("<td>");
-						out.println(rset2.getObject(2));
-						out.println("</td>");
-						out.println("<td>");
-						out.println(rset2.getObject(3));
-						out.println("</td>");
-						out.println("<td>");
-						out.println(rset2.getObject(4));
-						out.println("</td>");
-						out.println("<td>");
-						out.println(rset2.getObject(5));
-						out.println("</td>");
-
-			    		// Get the thumbnail images
-						try {
-							String sql_images = "select image_id from pacs_images where record_id = " + rset2.getObject("record_id");
-							Statement stmt_images = m_con.createStatement();
-						 	ResultSet rset_images = stmt_images.executeQuery(sql_images);
-							String image_id;
-
-							out.println("<td>");
-							while (rset_images != null && rset_images.next()) {
-								image_id = (rset_images.getObject(1)).toString();
-								// specify the servlet when thumbnail is clicked
-								out.println("<a href=\"/proj1/GetOnePic?regular" + image_id + "\" target=" + "_blank" + ">");
-								// display the thumbnail
-								out.println("<img src=\"/proj1/GetOnePic?thumbnail" + image_id + "\"></a>");
-							}
-							out.println("</td>");
-							rset_images.close();
-
-						} catch (Exception e) {
-							out.println(e.getMessage());
-						}
-
-						out.println("</tr>");
-	        		} 
-	        		out.println("</table>");
-		  		}
-			} else if (hasDate) {
-			  //TODO: need to do some sort of security check
-			  doSearch = m_con.prepareStatement("SELECT diagnosis, description, (first_name || ' ' || last_name) patient_name, test_date, record_id FROM radiology_record join persons on person_id = patient_id WHERE to_char(test_date, 'YYYY-MM-DD') >= ? and to_char(test_date, 'YYYY-MM-DD') <= ? order by test_date");
-
-			  doSearch.setString(1, startdate);
-			  doSearch.setString(2, enddate);
-
-        	  ResultSet rset2 = doSearch.executeQuery();
-        	  out.println("<table border=1>");
-        	  out.println("<tr>");
-          	  out.println("<th>Patient Name</th>");
-          	  out.println("<th>Diagnosis</th>");
-        	  out.println("<th>Description</th>");
-        	  out.println("<th>Test Date</th>");
-       		  out.println("</tr>");
-	          while(rset2.next()) {
-	            out.println("<tr>");
-		  	    out.println("<td>"); 
-	            out.println(rset2.getString(3));
-	            out.println("</td>");
-	            out.println("<td>"); 
-	            out.println(rset2.getString(2));
-	            out.println("</td>");
-	            out.println("<td>"); 
-	            out.println(rset2.getString(1)); 
-	            out.println("</td>");
-	            out.println("<td>"); 
-	            out.println(rset2.getString(4));
-
-				// Get the thumbnail images
-				try {
-					String sql_images = "select image_id from pacs_images where record_id = " + rset2.getObject("record_id");
-					Statement stmt_images = m_con.createStatement();
-				 	ResultSet rset_images = stmt_images.executeQuery(sql_images);
-					String image_id;
-
-					out.println("<td>");
-					while (rset_images != null && rset_images.next()) {
-						image_id = (rset_images.getObject(1)).toString();
-						// specify the servlet when thumbnail is clicked
-						out.println("<a href=\"/proj1/GetOnePic?regular" + image_id + "\" target=" + "_blank" + ">");
-						// display the thumbnail
-						out.println("<img src=\"/proj1/GetOnePic?thumbnail" + image_id + "\"></a>");
+					if (i != wordList.length - 1) {
+						searchStr1 += "+ ";
+						searchStr2 += " or ";
 					}
-					out.println("</td>");
-					rset_images.close();
 
-				} catch (Exception e) {
-					out.println(e.getMessage());
+					word += 4;
 				}
 
-	            out.println("</tr>");
-	          } 
-	          out.println("</table>");
+				searchStr1 += ")rank, ";
+				if (hasDate) {
+					searchStr2 += ") ";
+				}
+			} else {
+				searchStr1 += "(0) rank, ";
+			}
 
+			out.println(searchStr1);		
+			out.println("<br>"+searchStr2);
+
+			if (hasKeyword || hasDate) {
+				//TODO: need to do some sort of security check
+				
+				doSearch = m_con.createStatement();
+    			ResultSet rset2 = doSearch.executeQuery(searchStr1 + searchStr2 + " order by rank desc");
+				out.println("<table border=1>");
+				out.println("<tr>");
+				out.println("<th>Patient Name</th>");
+				out.println("<th>Diagnosis</th>");
+				out.println("<th>Description</th>");
+				out.println("<th>Test Date</th>");
+				out.println("<th>Rank</th>");
+				out.println("<th>Images</th>");
+		   		out.println("</tr>");
+        		while(rset2.next()) {
+					out.println("<tr>");
+					out.println("<td>"); 
+					out.println(rset2.getString("patient_name"));
+					out.println("</td>");
+					out.println("<td>"); 
+					out.println(rset2.getString("diagnosis"));
+					out.println("</td>");
+					out.println("<td>"); 
+					out.println(rset2.getString("description")); 
+					out.println("</td>");
+					out.println("<td>"); 
+					out.println(rset2.getString("test_date")); 
+					out.println("</td>");
+					out.println("<td>");
+					out.println(rset2.getObject("rank"));
+					out.println("</td>");
+					
+					// Get the thumbnail images
+					try {
+						String sql_images = "select image_id from pacs_images where record_id = " + rset2.getObject("record_id");
+						Statement stmt_images = m_con.createStatement();
+					 	ResultSet rset_images = stmt_images.executeQuery(sql_images);
+						String image_id;
+
+						out.println("<td>");
+						while (rset_images != null && rset_images.next()) {
+							image_id = (rset_images.getObject(1)).toString();
+							// specify the servlet when thumbnail is clicked
+							out.println("<a href=\"/proj1/GetOnePic?regular" + image_id + "\" target=" + "_blank" + ">");
+							// display the thumbnail
+							out.println("<img src=\"/proj1/GetOnePic?thumbnail" + image_id + "\"></a>");
+						}
+						out.println("</td>");
+						rset_images.close();
+
+					} catch (Exception e) {
+						out.println(e.getMessage());
+					}
+				
+					out.println("</tr>");
+				} 
+				out.println("</table>");
+			} 
 			} else {
 			  out.println("<br><b>Please enter search conditions</b>");
 			}          
-          }
+          
           m_con.close();
         } catch(SQLException e) {
           out.println("SQLException: " + e.getMessage());
