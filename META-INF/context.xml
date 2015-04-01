@@ -1,5 +1,3 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<Context override="true" path="/cmput391project" allowLinking="true">
-
-</Context>
+<Context reloadable="true" override="true" path="/cmput391project" allowLinking="true"></Context>
