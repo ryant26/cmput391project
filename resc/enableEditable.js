@@ -6,5 +6,12 @@ $(document).ready(function() {
     $('#username').editable();    
     $('#password').editable();    
     $('#date').editable();    
-    $('#class').editable();    
+    $('#class').editable();
+
+    $('#firstname').editable();    
+    $('#lastname').editable();    
+    $('#address').editable();    
+    $('#email').editable();    
+    $('#phone').editable();    
+
 });

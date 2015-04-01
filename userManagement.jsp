@@ -49,7 +49,7 @@
 		<!-- Tab panes -->
 
 	  <div class="tab-content">
-	    <div role="tabpanel" class="tab-pane active" id="Users">
+	    <div role="tabpanel" class="tab-pane" id="Users">
     		<div class="panel panel-default">
 			  <div class="panel-body">
 			    <div class="container">
@@ -103,7 +103,7 @@
 			  </div>
 			</div>
 	    </div>
-	    <div role="tabpanel" class="tab-pane" id="Persons">
+	    <div role="tabpanel" class="tab-pane  active" id="Persons">
 	    	<div class="panel panel-default">
 			  <div class="panel-body">
 			    <div class="container">
