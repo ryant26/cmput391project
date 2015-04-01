@@ -84,11 +84,11 @@
 				    			String pk = "\"" + id + "\"";
 				    											%>
 				    				<tr>
-								        <td id="username" data-type="text" data-url="#" data-title="Enter Userame" data-pk=<%out.println(pk);%>><%out.println(username);%></td>
-								        <td id="password" data-type="text" data-url="#" data-title="Enter Password" data-pk=<%out.println(pk);%>><%out.println(password);%></td>
+								        <td class="editable" id="username" data-type="text" data-url="#" data-title="Enter Userame" data-pk=<%out.println(pk);%>><%out.println(username);%></td>
+								        <td class="editable" id="password" data-type="text" data-url="#" data-title="Enter Password" data-pk=<%out.println(pk);%>><%out.println(password);%></td>
 								        <td><%out.println(id);%></td>
-								        <td id="date" data-type="date" data-url="#" data-title="Enter Date" data-pk=<%out.println(pk);%>><%out.println(dateRegistered);%></td>
-								        <td id="class" data-type="text" data-url="#" data-title="Enter Class" data-pk=<%out.println(pk);%>><%out.println(pClass);%></td>
+								        <td class="editable" id="date" data-type="date" data-url="#" data-title="Enter Date" data-pk=<%out.println(pk);%>><%out.println(dateRegistered);%></td>
+								        <td class="editable" id="class" data-type="text" data-url="#" data-title="Enter Class" data-pk=<%out.println(pk);%>><%out.println(pClass);%></td>
 								    </tr>
 				    		<%  }
 				    		} catch (Exception e){
@@ -125,12 +125,13 @@
 				    		query = "SELECT * FROM persons";
 				    		results = null;
 				    		stmt = null;
-
+				    		int i = 0;
 				    		try{
 				    			stmt = conn.createStatement();
 				    			results = stmt.executeQuery(query);
 
 				    			while(results.next()){ 
+				    			i++;
 				    			String firstname = results.getString(2);
 				    			String lastname = results.getString(3);
 				    			String id = results.getString(1);
@@ -141,11 +142,11 @@
 				    											%>
 				    				<tr>
 				    					<td><%out.println(id);%></td>
-								        <td id="firstname" data-type="text" data-url="#" data-title="Enter First Name" data-pk=<%out.println(pk);%>><%out.println(firstname);%></td>
-								        <td id="lastname" data-type="text" data-url="#" data-title="Enter Last Name" data-pk=<%out.println(pk);%>><%out.println(lastname);%></td>
-								        <td id="address" data-type="text" data-url="#" data-title="Enter Address" data-pk=<%out.println(pk);%>><%out.println(address);%></td>
-								        <td id="email" data-type="text" data-url="#" data-title="Enter Email" data-pk=<%out.println(pk);%>><%out.println(email);%></td>
-								        <td id="phone" data-type="text" data-url="#" data-title="Enter Phone Number" data-pk=<%out.println(pk);%>><%out.println(phone);%></td>
+								        <td class="editable" id="firstname" data-type="text" data-url="#" data-title="Enter First Name" data-pk=<%out.println(pk);%>><%out.println(firstname);%></td>
+								        <td class="editable" id="lastname" data-type="text" data-url="#" data-title="Enter Last Name" data-pk=<%out.println(pk);%>><%out.println(lastname);%></td>
+								        <td class="editable" id="address" data-type="text" data-url="#" data-title="Enter Address" data-pk=<%out.println(pk);%>><%out.println(address);%></td>
+								        <td class="editable" id="email" data-type="text" data-url="#" data-title="Enter Email" data-pk=<%out.println(pk);%>><%out.println(email);%></td>
+								        <td class="editable" id="phone" data-type="text" data-url="#" data-title="Enter Phone Number" data-pk=<%out.println(pk);%>><%out.println(phone);%></td>
 								    </tr>
 				    		<%  }
 				    		} catch (Exception e){
@@ -189,8 +190,8 @@
 				    			String pk = "\"" + doctorID + "\"";
 				    											%>
 				    				<tr>
-								        <td id="doctorid" data-type="text" data-url="#" data-title="Enter First Name" data-pk=<%out.println(pk);%>><%out.println(doctorID);%></td>
-								        <td id="patientid" data-type="text" data-url="#" data-title="Enter Last Name" data-pk=<%out.println(pk);%>><%out.println(patientID);%></td>
+								        <td class="editable" id="doctorid" data-type="text" data-url="#" data-title="Enter First Name" data-pk=<%out.println(pk);%>><%out.println(doctorID);%></td>
+								        <td class="editable" id="patientid" data-type="text" data-url="#" data-title="Enter Last Name" data-pk=<%out.println(pk);%>><%out.println(patientID);%></td>
 								    </tr>
 				    		<%  }
 				    		} catch (Exception e){
