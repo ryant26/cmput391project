@@ -9,7 +9,7 @@
     <meta name="author" content=" Ryan Thornhill">
     <link rel="icon" href="../../favicon.ico">
 
-    <title>Signin</title>
+    <title>User Management</title>
 
     <!-- Bootstrap core CSS -->
     <link href="./dist/css/bootstrap.min.css" rel="stylesheet">
@@ -36,10 +36,10 @@
   </head>
   <body>
   	<h1>User Management</h1>
-  	<ul class="nav nav-tabs">
-	  <li role="presentation" class="active"><a href="#">Home</a></li>
-	  <li role="presentation"><a href="#">Profile</a></li>
-	  <li role="presentation"><a href="#">Messages</a></li>
+  	<ul class="nav nav-tabs" role="tablist">
+	  <li role="presentation" class="active"><a href="#Users" role="tab" data-toggle="tab">Users</a></li>
+	  <li role="presentation"><a href="#Persons" role="tab" data-toggle="tab">Persons</a></li>
+	  <li role="presentation"><a href="#Family_doctor" role="tab" data-toggle="tab">Family_doctor</a></li>
 	</ul>
 	<div class="panel panel-default">
 	  <div class="panel-body">

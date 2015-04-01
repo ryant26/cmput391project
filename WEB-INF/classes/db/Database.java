@@ -18,10 +18,10 @@ public class Database{
 	public Database(){
 		String driverName = "oracle.jdbc.driver.OracleDriver";
 		// Use this dbstring to connect to the campus databases from home
-		// String dbstring = "jdbc:oracle:thin:@localhost:1525:CRS";
+		 String dbstring = "jdbc:oracle:thin:@localhost:1525:CRS";
 		
 		// Use this string on campus
-		String dbstring = "jdbc:oracle:thin:@gwynne.cs.ualberta.ca:1521:CRS";
+		//String dbstring = "jdbc:oracle:thin:@gwynne.cs.ualberta.ca:1521:CRS";
 		System.out.println("Attempting to connect to db:");
 		try{
 			// load and register the driver

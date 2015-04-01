@@ -5,3 +5,5 @@ $(document).ready(function() {
     //make username editable
     $('#username').editable();    
 });
+
+$('a[href=#tab2]').tab('show');
