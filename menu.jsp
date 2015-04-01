@@ -38,7 +38,7 @@
                 try{
                     if (userClass.equals("a")){ %>
 
-                        <a href="#" class="list-group-item">User Managment</a>
+                        <a href="userManagement.jsp" class="list-group-item">User Managment</a>
                         <a href="#" class="list-group-item">Report Generation</a>
                         <a href="#" class="list-group-item">Data Analysis</a>
                     

@@ -93,6 +93,8 @@
 				    		<%  }
 				    		} catch (Exception e){
 				    			System.out.println("Error getting data for User Table: " + e.getMessage());
+				    		} finally {
+				    			db.close();
 				    		}
 				    	%>
 				    </tbody>
@@ -101,7 +103,63 @@
 			  </div>
 			</div>
 	    </div>
-	    <div role="tabpanel" class="tab-pane" id="Persons">...</div>
+	    <div role="tabpanel" class="tab-pane" id="Persons">
+	    	<div class="panel panel-default">
+			  <div class="panel-body">
+			    <div class="container">
+				  <table class="table table-hover">
+				    <thead>
+				      <tr>
+						<th>Person ID</th>
+				        <th>First Name</th>
+				        <th>Last Name</th>
+				        <th>Address</th>
+				        <th>Email</th>
+				        <th>Phone</th>
+				      </tr>
+				    </thead>
+				    <tbody>
+				    	<%
+				    		db = new Database();
+				    		conn = db.getConnection();
+				    		query = "SELECT * FROM persons";
+				    		results = null;
+				    		stmt = null;
+
+				    		try{
+				    			stmt = conn.createStatement();
+				    			results = stmt.executeQuery(query);
+
+				    			while(results.next()){ 
+				    			String firstname = results.getString(2);
+				    			String lastname = results.getString(3);
+				    			String id = results.getString(1);
+				    			String address = results.getString(4);
+				    			String email = results.getString(5);
+				    			String phone = results.getString(6);
+				    			String pk = "\"" + id + "\"";
+				    											%>
+				    				<tr>
+				    					<td><%out.println(id);%></td>
+								        <td id="firstname" data-type="text" data-url="#" data-title="Enter First Name" data-pk=<%out.println(pk);%>><%out.println(firstname);%></td>
+								        <td id="lastname" data-type="text" data-url="#" data-title="Enter Last Name" data-pk=<%out.println(pk);%>><%out.println(lastname);%></td>
+								        <td id="address" data-type="text" data-url="#" data-title="Enter Address" data-pk=<%out.println(pk);%>><%out.println(address);%></td>
+								        <td id="email" data-type="text" data-url="#" data-title="Enter Email" data-pk=<%out.println(pk);%>><%out.println(email);%></td>
+								        <td id="phone" data-type="text" data-url="#" data-title="Enter Phone Number" data-pk=<%out.println(pk);%>><%out.println(phone);%></td>
+								    </tr>
+				    		<%  }
+				    		} catch (Exception e){
+				    			System.out.println("Error getting data for Persons Table: " + e.getMessage());
+				    		} finally {
+				    			db.close();
+				    		}
+				    	%>
+				    </tbody>
+				  </table>
+				</div>
+			  </div>
+			</div>
+	    </div>
 	    <div role="tabpanel" class="tab-pane" id="Family_doctor">...</div>
 	  </div>
 	</div>
