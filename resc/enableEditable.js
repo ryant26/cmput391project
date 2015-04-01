@@ -4,4 +4,7 @@ $(document).ready(function() {
     
     //make username editable
     $('#username').editable();    
+    $('#password').editable();    
+    $('#date').editable();    
+    $('#class').editable();    
 });

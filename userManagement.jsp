@@ -35,6 +35,7 @@
     <![endif]-->
   </head>
   <body>
+  	<%@ page import="java.sql.*, db.Database"%>
   	<h1>User Management</h1>
 
   	<div role="tabpanel">
@@ -55,27 +56,45 @@
 				  <table class="table table-hover">
 				    <thead>
 				      <tr>
-				        <th>Firstname</th>
-				        <th>Lastname</th>
-				        <th>Email</th>
+				        <th>Username</th>
+				        <th>Password</th>
+				        <th>Person ID</th>
+				        <th>Date Registered</th>
+				        <th>Class</th>
 				      </tr>
 				    </thead>
 				    <tbody>
-				      <tr>
-				        <td id="username" data-type="text" data-url="#" data-title="Enter Name">John</td>
-				        <td>Doe</td>
-				        <td>john@example.com</td>
-				      </tr>
-				      <tr>
-				        <td>Mary</td>
-				        <td>Moe</td>
-				        <td>mary@example.com</td>
-				      </tr>
-				      <tr>
-				        <td>July</td>
-				        <td>Dooley</td>
-				        <td>july@example.com</td>
-				      </tr>
+				    	<%
+				    		Database db = new Database();
+				    		Connection conn = db.getConnection();
+				    		String query = "SELECT * FROM users";
+				    		ResultSet results = null;
+				    		Statement stmt = null;
+
+				    		try{
+				    			stmt = conn.createStatement();
+				    			results = stmt.executeQuery(query);
+
+				    			while(results.next()){ 
+				    			String username = results.getString(1);
+				    			String password = results.getString(2);
+				    			String id = results.getString(4);
+				    			String dateRegistered = results.getString(5);
+				    			String pClass = results.getString(3);
+				    			String pk = "\"" + id + "\"";
+				    											%>
+				    				<tr>
+								        <td id="username" data-type="text" data-url="#" data-title="Enter Userame" data-pk=<%out.println(pk);%>><%out.println(username);%></td>
+								        <td id="password" data-type="text" data-url="#" data-title="Enter Password" data-pk=<%out.println(pk);%>><%out.println(password);%></td>
+								        <td><%out.println(id);%></td>
+								        <td id="date" data-type="date" data-url="#" data-title="Enter Date" data-pk=<%out.println(pk);%>><%out.println(dateRegistered);%></td>
+								        <td id="class" data-type="text" data-url="#" data-title="Enter Class" data-pk=<%out.println(pk);%>><%out.println(pClass);%></td>
+								    </tr>
+				    		<%  }
+				    		} catch (Exception e){
+				    			System.out.println("Error getting data for User Table: " + e.getMessage());
+				    		}
+				    	%>
 				    </tbody>
 				  </table>
 				</div>
