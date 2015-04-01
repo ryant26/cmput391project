@@ -84,7 +84,7 @@
 				    			String pk = "\"" + id + "\"";
 				    											%>
 				    				<tr>
-								        <td class="editable" id="username" data-type="text" data-url="#" data-title="Enter Userame" data-pk=<%out.println(pk);%>><%out.println(username);%></td>
+								        <td class="editable" id="username" data-type="text" data-url="SubmitData" data-title="Enter Userame" data-pk=<%out.println(pk);%>><%out.println(username);%></td>
 								        <td class="editable" id="password" data-type="text" data-url="#" data-title="Enter Password" data-pk=<%out.println(pk);%>><%out.println(password);%></td>
 								        <td><%out.println(id);%></td>
 								        <td class="editable" id="date" data-type="date" data-url="#" data-title="Enter Date" data-pk=<%out.println(pk);%>><%out.println(dateRegistered);%></td>
@@ -169,7 +169,7 @@
 				    <thead>
 				      <tr>
 						<th>Doctor ID</th>
-				        <th>Patient Name</th>
+				        <th>Patient ID</th>
 				      </tr>
 				    </thead>
 				    <tbody>
