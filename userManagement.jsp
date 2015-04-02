@@ -38,10 +38,11 @@
   	<%@ page import="java.sql.*, db.Database"%>
   	<%
   		try{
-	  		if (((String) session.getAttribute("class")) != "a"){
+	  		if (!(((String) session.getAttribute("class")).equals("a"))){
 	  			throw new Exception();
 	  		}
 	  	} catch (Exception e){
+	  		System.out.println("Error on UM: " + e.getMessage());
 	  		response.sendError(HttpServletResponse.SC_FORBIDDEN);
 	  	}
   	%>

@@ -31,7 +31,7 @@
     <body>
         <%
         try{
-            if (((String) session.getAttribute("class")) != "a"){
+            if (!(((String) session.getAttribute("class")).equals("a"))){
                 throw new Exception();
             }
         } catch (Exception e){
