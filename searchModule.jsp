@@ -6,7 +6,7 @@
 	<title>Search</title>
 	</head>
 	<body>
-    
+    	<p>Search Module</p>
     <%
   		String m_url = "jdbc:oracle:thin:@gwynne.cs.ualberta.ca:1521:CRS";
 		String m_driverName = "oracle.jdbc.driver.OracleDriver";
@@ -35,7 +35,7 @@
 		try {
 			stmt = m_con.createStatement();
 			ResultSet rset = stmt.executeQuery(selectString);
-			out.println("<table border=1>");
+			/*out.println("<table border=1>");
 			out.println("<tr>");
 			out.println("<th>Record_ID</th>");
 			out.println("<th>Patient Name</th>");
@@ -95,14 +95,14 @@
 					}
 					out.println("</td>");
 					rset_images.close();
-
+				
 				} catch (Exception e) {
 					out.println(e.getMessage());
 				}
 				out.println("</tr>"); 
         	} 
 			out.println("</table>");
-        	stmt.close();     
+        	*/stmt.close();     
           
 	%>
 
@@ -133,6 +133,12 @@
 					<input type=text name=enddate>
 				</td>
 			</tr>
+			<tr>
+				<td>Order by date?</td>
+				<td>
+					<input type="checkbox" name="order" value="Y">
+				</td>
+			</tr>	
 			<td>
 				<input type=submit value="Search" name="search">
 			</td>
@@ -149,6 +155,7 @@
 			//default search string
 			String searchStr1 = "SELECT ";
 			String searchStr2 = "diagnosis, description, (first_name || ' ' || last_name) patient_name, test_date, record_id FROM radiology_record join persons on person_id = patient_id WHERE ";
+			String searchStr3 = " order by rank desc";
           	
 			if(!((startdate = request.getParameter("startdate")).equals(""))) {
 		  		out.println("<br>");
@@ -206,14 +213,18 @@
 				searchStr1 += "(0) rank, ";
 			}
 
-			out.println(searchStr1);		
-			out.println("<br>"+searchStr2);
+			//out.println(searchStr1);		
+			//out.println("<br>"+searchStr2);
+			
+			if (request.getParameter("order")!= null) {
+				searchStr3 = " order by test_date, rank";
+			}
 
 			if (hasKeyword || hasDate) {
 				//TODO: need to do some sort of security check
 				
 				doSearch = m_con.createStatement();
-    			ResultSet rset2 = doSearch.executeQuery(searchStr1 + searchStr2 + " order by rank desc");
+    			ResultSet rset2 = doSearch.executeQuery(searchStr1 + searchStr2 + searchStr3);
 				out.println("<table border=1>");
 				out.println("<tr>");
 				out.println("<th>Patient Name</th>");
