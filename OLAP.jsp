@@ -7,13 +7,13 @@
     <BODY> 
 		<%
 			//only admin can use
-			try{
+			/*try{
 				if (!(((String) session.getAttribute("class")).equals("a"))){
 					throw new Exception();
 				}
 			} catch (Exception e){
 				response.sendError(HttpServletResponse.SC_FORBIDDEN);
-			}
+			}*/
 		%>
 
 		<%
@@ -126,8 +126,8 @@
 		        }
 
 				if(hasPatient) {
-					OLAPStr1 += "p.person_id, (p.first_name || ' ' || p.last_name) patient_name, ";
-					OLAPStr3 += "p.person_id, (p.first_name || ' ' || p.last_name), ";
+					OLAPStr1 += "p.person_id, ";
+					OLAPStr3 += "p.person_id, ";
 				}
 
 				if(hasType) {
@@ -154,7 +154,7 @@
 
 				OLAPStr3 += " test_date)";
 				
-				out.println("<br>" + OLAPStr1 + OLAPStr2 + OLAPStr3);
+				//out.println("<br>" + OLAPStr1 + OLAPStr2 + OLAPStr3);
 
 				doOLAP = m_con.createStatement();
 				ResultSet rset = doOLAP.executeQuery(OLAPStr1 + OLAPStr2 + OLAPStr3);
@@ -163,6 +163,7 @@
 				out.println("<tr>");
 
 				if (hasPatient) {
+					out.println("<th>Patient ID</th>");
 					out.println("<th>Patient Name</th>");
 				}
 
@@ -178,8 +179,22 @@
 					out.println("<tr>");
 					if (hasPatient) {
 						out.println("<td>"); 
-						out.println(rset.getString("patient_name"));
+						out.println(rset.getString("person_id")); 
 						out.println("</td>");
+						
+						out.println("<td>"); 
+						if(rset.getString("person_id") != null) {
+							Statement getPName = m_con.createStatement();
+							ResultSet rset2 = getPName.executeQuery("Select (first_name || ' ' || last_name) patient_name from persons where person_id =" + rset.getInt("person_id"));
+						
+							rset2.next();
+							
+							out.println(rset2.getString("patient_name"));
+							
+						} else {
+							out.println("null");
+						}
+						out.println("</td>");						
 					}
 					if (hasType) {
 						out.println("<td>"); 
