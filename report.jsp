@@ -29,7 +29,7 @@
     </head>
 
     <body>
-        <div class="panel panel-default search-area">
+        <div class="panel panel-default">
           <div class="panel-heading">
             <h3 class="panel-title">Search Area</h3>
           </div>
@@ -46,8 +46,14 @@
                     <label for="end-date">End:</label>
                     <input type="date" id="end-date" name="enddate" class="form-control date-field" placeholder="Start Date" required autofocus>
                 </div>
+                <button type="submit" class="btn btn-primary">Search</button>
             </form>
           </div>
+        </div>
+        <div class="panel panel-default">
+            <div class="panel-body">
+
+            </div>
         </div>
     </body>
 </html>
