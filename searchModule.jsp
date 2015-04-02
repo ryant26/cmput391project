@@ -6,7 +6,7 @@
 	<title>Search</title>
 	</head>
 	<body>
-    
+    	<p>Search Module</p>
     <%
   		String m_url = "jdbc:oracle:thin:@gwynne.cs.ualberta.ca:1521:CRS";
 		String m_driverName = "oracle.jdbc.driver.OracleDriver";
@@ -35,7 +35,7 @@
 		try {
 			stmt = m_con.createStatement();
 			ResultSet rset = stmt.executeQuery(selectString);
-			out.println("<table border=1>");
+			/*out.println("<table border=1>");
 			out.println("<tr>");
 			out.println("<th>Record_ID</th>");
 			out.println("<th>Patient Name</th>");
@@ -95,14 +95,14 @@
 					}
 					out.println("</td>");
 					rset_images.close();
-
+				
 				} catch (Exception e) {
 					out.println(e.getMessage());
 				}
 				out.println("</tr>"); 
         	} 
 			out.println("</table>");
-        	stmt.close();     
+        	*/stmt.close();     
           
 	%>
 
