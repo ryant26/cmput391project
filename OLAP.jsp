@@ -1,10 +1,20 @@
-<%@ page import="java.sql.*, java.util.*" %>
+<%@ page import="java.sql.*, java.util.*, db.Database" %>
 <HTML>
 	<head>
 		<meta http-equiv="content-type" content="text/html; charset=windows-1250">
   		<title>OLAP</title>
  	</head>
     <BODY> 
+		<%
+			//only admin can use
+			try{
+				if (!(((String) session.getAttribute("class")).equals("a"))){
+					throw new Exception();
+				}
+			} catch (Exception e){
+				response.sendError(HttpServletResponse.SC_FORBIDDEN);
+			}
+		%>
 
 		<%
   		String m_url = "jdbc:oracle:thin:@gwynne.cs.ualberta.ca:1521:CRS";
@@ -27,6 +37,10 @@
 			out.println(e.getMessage());
 			return;
 		} 
+
+		//use this for final submission
+		//Database db = new Database();
+		//m_con = db.getConnection();
           
 	%>
 

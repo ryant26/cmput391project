@@ -32,9 +32,15 @@
 			return;
 		}
 
+		//use this for final submission
+		//Database db = new Database();
+		//m_con = db.getConnection();
+
 		try {
 			stmt = m_con.createStatement();
 			ResultSet rset = stmt.executeQuery(selectString);
+
+			//test code below
 			/*out.println("<table border=1>");
 			out.println("<tr>");
 			out.println("<th>Record_ID</th>");
@@ -138,7 +144,7 @@
 				<td>
 					<input type="checkbox" name="order" value="Y">
 				</td>
-			</tr>	
+			</tr>
 			<td>
 				<input type=submit value="Search" name="search">
 			</td>
@@ -157,6 +163,14 @@
 			String searchStr2 = "diagnosis, description, (first_name || ' ' || last_name) patient_name, test_date, record_id FROM radiology_record join persons on person_id = patient_id WHERE ";
 			String searchStr3 = " order by rank desc";
           	
+			//d for doctor, p for patient?
+			if ((((String) session.getAttribute("class")).equals("d"))){
+				searchStr2 += session.getAttribute("person_id") + "= doctor_id, ";
+			} else if ((((String) session.getAttribute("class")).equals("p"))) {
+				searchStr2 += session.getAttribute("person_id") + "= patient_id, ";
+			}		
+
+
 			if(!((startdate = request.getParameter("startdate")).equals(""))) {
 		  		out.println("<br>");
       	  		out.println("Start Date: " + startdate);
