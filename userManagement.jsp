@@ -36,6 +36,15 @@
   </head>
   <body>
   	<%@ page import="java.sql.*, db.Database"%>
+  	<%
+  		try{
+	  		if (((String) session.getAttribute("class")) != "a"){
+	  			throw new Exception();
+	  		}
+	  	} catch (Exception e){
+	  		response.sendError(HttpServletResponse.SC_FORBIDDEN);
+	  	}
+  	%>
   	<h1>User Management</h1>
 
   	<div role="tabpanel">

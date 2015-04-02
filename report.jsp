@@ -29,6 +29,15 @@
     </head>
 
     <body>
+        <%
+        try{
+            if (((String) session.getAttribute("class")) != "a"){
+                throw new Exception();
+            }
+        } catch (Exception e){
+            response.sendError(HttpServletResponse.SC_FORBIDDEN);
+        }
+        %>
         <div class="panel panel-default">
           <div class="panel-heading">
             <h3 class="panel-title">Search Area</h3>
