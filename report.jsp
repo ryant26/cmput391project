@@ -40,20 +40,78 @@
                 </div>
                 <div class="form-group">
                     <label for="start-date">Start:</label>
-                    <input type="date" id="start-date" name="startdaate" class="form-control date-field" placeholder="Start Date" required autofocus>
+                    <input type="date" id="start-date" name="startdate" class="form-control date-field" placeholder="Start Date" required autofocus>
                 </div>
                 <div class="form-group">
                     <label for="end-date">End:</label>
                     <input type="date" id="end-date" name="enddate" class="form-control date-field" placeholder="Start Date" required autofocus>
                 </div>
-                <button type="submit" class="btn btn-primary">Search</button>
+                <button name="bSubmit" type="submit" class="btn btn-primary">Search</button>
             </form>
           </div>
         </div>
-        <div class="panel panel-default">
-            <div class="panel-body">
+        <%@ page import="java.sql.*, db.Database"%>
+                <%
+                    if (request.getParameter("bSubmit") != null){
+                        String diagnosis = request.getParameter("diagnosis").trim();
+                        String startDate = request.getParameter("startdate").trim();
+                        String endDate = request.getParameter("enddate").trim();
+                        System.out.println("DEBUG start date :" + startDate);
+                        System.out.println("DEBUG end date :" + endDate);
 
-            </div>
-        </div>
+                        Database db = new Database();
+                        Connection conn = db.getConnection();
+                        String query = " SELECT p.last_name, p.first_name, p.address, p.phone, r.test_date " +
+                        "FROM persons p, radiology_record r " +
+                        "WHERE p.person_id = r.patient_id " +
+                        "AND '" + diagnosis + "' = r.diagnosis " +
+                        "AND r.test_date between to_date('" + startDate +"', 'YYYY-MM-DD') " +
+                        "AND to_date('" + endDate +"', 'YYYY-MM-DD') " +
+                        "ORDER BY p.last_name";
+
+                        try{
+                            Statement stmt = conn.createStatement();
+                            ResultSet results = stmt.executeQuery(query); %>
+                            <div class="panel panel-default">
+                                <div class="panel-body">
+                                    <table class="table table-striped"> 
+                                        <thead>
+                                          <tr>
+                                            <th>Last Name</th>
+                                            <th>First Name</th>
+                                            <th>Address</th>
+                                            <th>Phone Mumber</th>
+                                            <th>Test Date</th>
+                                          </tr>
+                                        </thead> 
+                                        <tbody><%
+                            while (results.next()){
+                                String lastname = results.getString(1);
+                                String firstname = results.getString(2);
+                                String address = results.getString(3);
+                                String phonenumber = results.getString(4);
+                                String testdate = results.getString(5);
+                                %>
+                                <tr>
+                                    <td id="lastname"><%out.println(lastname);%></td>
+                                    <td id="firstname"><%out.println(firstname);%></td>
+                                    <td id="address"><%out.println(address);%></td>
+                                    <td id="phonenumber"><%out.println(phonenumber);%></td>
+                                    <td id="testdate"><%out.println(testdate);%></td>
+                                </tr>
+                                <%
+                            }
+                            %>          </tbody>
+                                    </table>
+                                </div>
+                            </div> <%
+                        } catch (Exception e){
+                            System.out.println("Error In report: " + e.getMessage());
+                        } finally {
+                            db.close();
+                        }
+                    }
+                %>
+        
     </body>
 </html>
