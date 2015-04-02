@@ -22,6 +22,9 @@ public class SubmitData extends HttpServlet{
 
 	 public void doPost(HttpServletRequest request, HttpServletResponse response) 
 	 throws ServletException, IOException{
+	 	if (!request.getSession().getAttribute("class").equals("a")){
+	 		sendFailure("Only admins can use this page");
+	 	}
 	 	this.response = response;
 	 	response.setContentType("text/html");
 
@@ -37,6 +40,24 @@ public class SubmitData extends HttpServlet{
 	 		handleDateRegistered(pk, value);
 	 	} else if (name.equals("class")) {
 	 		handleClass(pk, value);
+	 	} else if (name.equals("firstname")){
+	 		handleFristName(pk, value);
+	 	} else if (name.equals("lastname")){
+	 		handleLastName(pk, value);
+	 	} else if (name.equals("address")){
+	 		handleAddress(pk, value);
+	 	} else if (name.equals("email")){
+	 		handleEmail(pk, value);
+	 	} else if (name.equals("phone")) {
+	 		handlePhone(pk, value);
+	 	} else if (name.equals("doctorid")){
+	 		String [] pks = pk.split("\\.");
+	 		handleDocID(pks[0], pks[1], value);
+	 	} else if (name.equals("patientid")){
+	 		String [] pks = pk.split("\\.");
+	 		handlePatientID(pks[0], pks[1], value);
+	 	} else {
+	 		sendFailure("value not understood");
 	 	}
 	}
 
@@ -70,11 +91,88 @@ public class SubmitData extends HttpServlet{
 		}
 	}
 
+	private void handleFristName(String pk, String value){
+		updateName(buildPersonsQuery("first_name", value, pk), value);
+	}
+
+	private void handleLastName(String pk, String value){
+		updateName(buildPersonsQuery("last_name", value, pk), value);
+	}
+
+	private void handleAddress(String pk, String value){
+		String query = buildPersonsQuery("address", value, pk);
+		if (length(value, 128)){
+			runQuery(query);
+		} else {
+			sendFailure("Must be less than 128 chars");
+		}
+	}
+
+	private void handleEmail(String pk, String value){
+		String query = buildPersonsQuery("email", value, pk);
+		if (value.contains("@") && value.contains(".")){
+			if (length(value, 128)){
+				runQuery(query);
+			} else {
+				sendFailure("Must be less than 128 chars");
+			}
+		} else {
+			sendFailure("Not a valid email");
+		}
+	}
+
+	private void handlePhone(String pk, String value){
+		String query = buildPersonsQuery("phone", value, pk);
+		if (numbersOnly(value)){
+			runQuery(query);
+		} else {
+			sendFailure("Can only contain digits");
+		}
+	}
+
+	private void handleDocID(String doc, String pat, String value){
+		String query = buildFamilyDoctorQuery("doctor_id", value, doc, pat);
+		if (numbersOnly(value)){
+			runQuery(query);
+		} else {
+			sendFailure("only numbers allowed");
+		}
+	}
+
+	private void handlePatientID(String doc, String pat, String value){
+		String query = buildFamilyDoctorQuery("patient_id", value, doc, pat);
+		if (numbersOnly(value)){
+			runQuery(query);
+		} else {
+			sendFailure("Only numbers allowed");
+		}
+	}
+
+	private void updateName(String query, String value){
+		if (noSpaces(value)){
+			if (length(value, 24)){
+				runQuery(query);
+			} else {
+				sendFailure("Must be less than 24 chars");
+			}
+		} else {
+			sendFailure("No spaces Allowed");
+		}
+	}
+
 	private boolean noSpaces(String input){
 		if(input.split(" ").length > 1){
 			return false;
 		}
 		return true;
+	}
+
+	private boolean numbersOnly(String input){
+		if (input.matches("^[\\d]+$")){
+			return true;
+		} else {
+			return false;
+		}
 	}
 
 	private boolean length(String input, int len){
@@ -103,6 +201,14 @@ public class SubmitData extends HttpServlet{
 
 	private String buildUsersQuery(String field, String value, String pk){
 		return buildQuery("users", field, value, "person_id", pk);
+	}
+
+	private String buildPersonsQuery(String field, String value, String pk){
+		return buildQuery("persons", field, value, "person_id", pk);
+	}
+
+	private String buildFamilyDoctorQuery(String field, String value, String doc, String pat){
+		return "UPDATE family_doctor SET "+ field +"= '" + value + "' where doctor_id  = " + doc + " AND patient_id = " + pat;
 	}
 
 	private String buildQuery(String table, String field, String value, String pk, String pk_value){
