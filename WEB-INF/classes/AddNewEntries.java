@@ -81,14 +81,18 @@ public class AddNewEntries extends HttpServlet{
 			String email = request.getParameter("email");
 			String phone = request.getParameter("phone");
 
-			String query = "INSERT INTO persons values(" +
-				personid + ", " +
-				firstname + ", " +
-				lastname + ", " +
-				address + ", " +
-				email + ", " +
-				phone + ")";
+			System.out.println("Person Insert: " + personid + " " + firstname + 
+				" " + lastname + " " + address + " " + email + " " + phone);
 
+			String query = "INSERT INTO persons values(" +
+				personid + ", '" +
+				firstname + "', '" +
+				lastname + "', '" +
+				address + "', '" +
+				email + "', '" +
+				phone + "')";
+			
+			System.out.println("Attempted query: " + query);
 
 			if (!validateCredentials(firstname, "First Name", 24)){
 				return;
