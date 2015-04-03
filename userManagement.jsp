@@ -109,6 +109,7 @@
 				    	%>
 				    </tbody>
 				  </table>
+				<a type="button" href="addUser.jsp" class="btn btn-primary">Add a new User</a>
 				</div>
 			  </div>
 			</div>
@@ -165,6 +166,7 @@
 				    	%>
 				    </tbody>
 				  </table>
+				  <a type="button" href="addPerson.jsp" class="btn btn-primary">Add a new Person</a>
 				</div>
 			  </div>
 			</div>
@@ -210,6 +212,7 @@
 				    	%>
 				    </tbody>
 				  </table>
+				  <a type="button" href="addFamilyDoctor.jsp" class="btn btn-primary">Add a new Family Doctor</a>
 				</div>
 			  </div>
 			</div>
