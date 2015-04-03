@@ -28,5 +28,13 @@
 		<servlet-name>AddNewEntries</servlet-name>
 		<url-pattern>/AddNewEntries</url-pattern>
 	</servlet-mapping>
+	<servlet>
+		<servlet-name>Logout</servlet-name>
+		<servlet-class>Logout</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>Logout</servlet-name>
+		<url-pattern>/Logout</url-pattern>
+	</servlet-mapping>
 
 </web-app>
