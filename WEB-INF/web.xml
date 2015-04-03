@@ -20,5 +20,13 @@
         <servlet-name>GetOnePic</servlet-name>
         <url-pattern>/GetOnePic</url-pattern>
     </servlet-mapping>
+    <servlet>
+		<servlet-name>AddNewEntries</servlet-name>
+		<servlet-class>AddNewEntries</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>AddNewEntries</servlet-name>
+		<url-pattern>/AddNewEntries</url-pattern>
+	</servlet-mapping>
 
 </web-app>

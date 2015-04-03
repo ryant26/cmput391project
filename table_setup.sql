@@ -85,4 +85,4 @@ CREATE TABLE pacs_images (
 
 /* Create Admin */
 INSERT INTO persons values (1, 'Bob', 'Smith', '123 apple st.', 'Bob@bob.ca', '4039912288');
-INSERT INTO users values('admin', 'admin', 'a', 1, TO_DATE('2003/05/03 21:02:44', 'yyyy/mm/dd hh24:mi:ss'));
+INSERT INTO users values('admin', 'admin', 'a', 1, TO_DATE('2003/05/03', 'yyyy/mm/dd'));

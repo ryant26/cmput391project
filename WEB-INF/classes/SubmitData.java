@@ -80,6 +80,8 @@ public class SubmitData extends HttpServlet{
 	}
 
 	private void handleDateRegistered(String pk, String value){
+		String query = buildUsersQuery("date_registered", "to_date('" + value +"', 'YYYY-MM-DD')", pk);
+		runQuery(query);
 	}
 
 	private void handleClass(String pk, String value){
