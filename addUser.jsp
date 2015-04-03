@@ -27,6 +27,15 @@
     </div>
     </head>
     <body>
+      <%
+        try{
+            if (!(((String) session.getAttribute("class")).equals("a"))){
+                throw new Exception();
+            }
+        } catch (Exception e){
+            response.sendError(HttpServletResponse.SC_FORBIDDEN);
+        }
+        %>
         <div class="panel panel-default">
           <div class="panel-body">
             <form class="form-horizontal" id="addUserForm" action="AddNewEntries">
