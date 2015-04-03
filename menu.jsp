@@ -9,7 +9,7 @@
     <meta name="author" content=" Ryan Thornhill">
     <link rel="icon" href="../../favicon.ico">
 
-    <title>Signin</title>
+    <title>Menu</title>
 
     <!-- Bootstrap core CSS -->
     <link href="./dist/css/bootstrap.min.css" rel="stylesheet">
