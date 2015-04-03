@@ -1,154 +1,186 @@
-<p>
-  <u>Help</u>
-</p>
-<p>
-  By: Ryan Thornhill &amp; Andy Yao
-</p>
-<h1>
-  <u>Contents:</u>
-</h1>
-<ul>
-  <li>
-    <a href="file:///C:/Users/Ryan/Documents/Help.htm#_Installation:">Installation</a>
-  </li>
-  <li>
-    <a href="file:///C:/Users/Ryan/Documents/Help.htm#_Login_Module:">Login Module</a>
-  </li>
-  <li>
-    <a href="file:///C:/Users/Ryan/Documents/Help.htm#_User_Management:">User Management</a>
-  </li>
-  <li>
-    <a href="file:///C:/Users/Ryan/Documents/Help.htm#_Report_Generation:">Report Generation</a>
-  </li>
-  <li>
-    <a href="file:///C:/Users/Ryan/Documents/Help.htm#_Search:">Search Module</a>
-  </li>
-  <li>
-    <a href="file:///C:/Users/Ryan/Documents/Help.htm#_Uploading_Module:">Uploading module</a>
-  </li>
-  <li>
-    <a href="file:///C:/Users/Ryan/Documents/Help.htm#_Data_Analysis_Module:">Data Analysis module</a>
-  </li>
-</ul>
-<h1>
-  <a name="_Installation:"></a>
-  <u>Installation:</u>
-</h1>
-<p>
-  1. Extract contents into the webapps directory of your tomcat installation (catalina/webapps/)
-</p>
-<p>
-  2. In the terminal navigate to webapps/cmput391project/WEB-INF/classes/
-</p>
-<p>
-  3. Run <code>make</code> in that directory
-</p>
-<p>
-  4. Start / Restart Tomcat (starttomcat)
-</p>
-<p>
-  5. Open a web browser and navigate to http://ug&lt;#&gt;.cs.ualberta.ca:&lt;first port number&gt;/cmput391project/login.jsp
-</p>
-<p>
-  a. You can obtain your workstation number by typing <code>hostname</code> into the terminal
-</p>
-<h1>
-  <a name="_Login_Module:"></a>
-  <u>Login Module:</u>
-</h1>
-<h2>
-  Overview:
-</h2>
-<p>
-  The login module is the entry point for the site and allows a user to authenticate in order to use all features they are authorized for.
-</p>
-<h2>
-  <a name="_User_Management:"></a>
-  Login Page:
-</h2>
-<p>
-  Accessed via {BASE_URL}/Login.jsp
-</p>
-<p>
-  This page is the entry point for the system. A user can enter a username and password then hit the &#8220;sign in&#8221; button
-</p>
-<h2>
-  Modify Account:
-</h2>
-<p>
-  Accessed via{BASE_URL}/modifyAccount.jsp
-</p>
-<p>
-  This page can be used to alter account information for the currently signed in user. Click on any column in the table to edit its value.
-</p>
-<h1>
-  <u>User Management:</u>
-</h1>
-<h2>
-  Overview:
-</h2>
-<p>
-  The user management module is accessible only from an administrator account. It can be used to edit and create information about users, persons, and family
-  doctors.
-</p>
-<h2>
-  Edit Pages (Tabs):
-</h2>
-<p>
-  All of the information in the users, persons and family_doctors tables can be edited from the main User Management page. Use the tabs at the top of the
-  page to view the corresponding information. To edit information click on the cell you wish to alter, a popup will allow you to enter a new value. To add a
-  value to the table click on the &#8220;add &lt;data item&gt;&#8221; button at the bottom of the page.
-</p>
-<h2>
-  Creation:
-</h2>
-<p>
-  The creation pages can all be reached by navigating to the tab corresponding to the information you wish to add and selectin the &#8220;add&#8221; button
-  at the bottom of the page.
-</p>
-<h3>
-  Users:
-</h3>
-<p>
-  Fill in all fields and click submit.
-</p>
-<p>
-  Persons:
-</p>
-<p>
-  Fill in all fields and click submit. Class must be (a administrator, p patient, d doctor, or r radiologist)
-</p>
-<p>
-  Family Doctor:
-</p>
-<p>
-  Fill in the id for the doctor to be pared with the id of the patient.
-</p>
-<h1>
-  <a name="_Report_Generation:"></a>
-  <u>Report Generation:</u>
-</h1>
-<h2>
-  Overview:
-</h2>
-<h1>
-  <a name="_Search:"></a>
-  <u>Search:</u>
-</h1>
-<h2>
-  Overview:
-</h2>
-<h1>
-  <a name="_Uploading_Module:"></a>
-  <u>Uploading Module:</u>
-</h1>
-<h2>
-  Overview:
-</h2>
-<h1>
-  <a name="_Data_Analysis_Module:"></a>
-  <u>Data Analysis Module:</u>
-</h1>
-<h2>
-  Overview:
-</h2>
+<p>Help</p>
+
+<p>By: Ryan Thornhill &amp; Andy Yao</p>
+
+<h1>Contents:</h1>
+
+<p>· <href="#_Installation:">Installation</a></p>
+
+<p>· <href="#_Login_Module:">Login Module</a></p>
+
+<p>· <href="#_User_Management:">User Management</a></p>
+
+<p>· <href="#_Report_Generation:">Report Generation</a></p>
+
+<p>· <href="#_Search:">Search Module</a></p>
+
+<p>· <href="#_Uploading_Module:">Uploading module</a></p>
+
+<p>· <href="#_Data_Analysis_Module:">Data Analysis module</a></p>
+
+<h1><a name="_Installation:"></a>Installation:</h1>
+
+<p>1. Extract contents into the webapps directory of your tomcat installation (catalina/webapps/)</p>
+
+<p>2. In the terminal navigate to webapps/cmput391project/WEB-INF/classes/</p>
+
+<p>3. Run <code>make</code> in that directory</p>
+
+<p>4. Start / Restart Tomcat (starttomcat)</p>
+
+<p>5. Open a web browser and navigate to http://ug&lt;#&gt;.cs.ualberta.ca:&lt;first port number&gt;/cmput391project/login.jsp</p>
+
+<p>a. You can obtain your workstation number by typing <code>hostname</code> into the terminal</p>
+
+<h1><a name="_Login_Module:"></a>Login Module:</h1>
+
+<h2>Overview: </h2>
+
+<p>The login module is the entry point for the site and allows a user to authenticate in order to use all features they are authorized for.</p>
+
+<h2><a name="_User_Management:"></a>Login Page:</h2>
+
+<p>Accessed via {BASE_URL}/Login.jsp</p>
+
+<p>This page is the entry point for the system. A user can enter a username and password then hit the “sign in” button</p>
+
+<h2>Modify Account:</h2>
+
+<p>Accessed via{BASE_URL}/modifyAccount.jsp</p>
+
+<p>This page can be used to alter account information for the currently signed in user. Click on any column in the table to edit its value. </p>
+
+<h1>User Management:</h1>
+
+<h2>Overview:</h2>
+
+<p>The user management module is accessible only from an administrator account. It can be used to edit and create information about users, persons, and family doctors.</p>
+
+<h2>Edit Pages (Tabs):</h2>
+
+<p>All of the information in the users, persons and family_doctors tables can be edited from the main User Management page. Use the tabs at the top of the page to view the corresponding information. To edit information click on the cell you wish to alter, a popup will allow you to enter a new value. To add a value to the table click on the “add &lt;data item&gt;” button at the bottom of the page.</p>
+
+<h2>Creation:</h2>
+
+<p>The creation pages can all be reached by navigating to the tab corresponding to the information you wish to add and selectin the “add” button at the bottom of the page. </p>
+
+<h3>Users:</h3>
+
+<p>Fill in all fields and click submit.</p>
+
+<p>Persons:</p>
+
+<p>Fill in all fields and click submit. Class must be (a administrator, p patient, d doctor, or r radiologist)</p>
+
+<p>Family Doctor:</p>
+
+<p>Fill in the id for the doctor to be pared with the id of the patient.</p>
+
+<h1><a name="_Report_Generation:"></a>Report Generation:</h1>
+
+<h2>Overview:</h2>
+
+<h1><a name="_Search:"></a>Search:</h1>
+
+<h2>Overview:</h2>
+
+<h1><a name="_Uploading_Module:"></a>Uploading Module:</h1>
+
+<h2>Overview:</h2>
+
+<h1><a name="_Data_Analysis_Module:"></a>Data Analysis Module:</h1>
+
+<h2>Overview:</h2>
+<p>Help</p>
+
+<p>By: Ryan Thornhill &amp; Andy Yao</p>
+
+<h1>Contents:</h1>
+
+<p>· <href="#_Installation:">Installation</a></p>
+
+<p>· <href="#_Login_Module:">Login Module</a></p>
+
+<p>· <href="#_User_Management:">User Management</a></p>
+
+<p>· <href="#_Report_Generation:">Report Generation</a></p>
+
+<p>· <href="#_Search:">Search Module</a></p>
+
+<p>· <href="#_Uploading_Module:">Uploading module</a></p>
+
+<p>· <href="#_Data_Analysis_Module:">Data Analysis module</a></p>
+
+<h1><a name="_Installation:"></a>Installation:</h1>
+
+<p>1. Extract contents into the webapps directory of your tomcat installation (catalina/webapps/)</p>
+
+<p>2. In the terminal navigate to webapps/cmput391project/WEB-INF/classes/</p>
+
+<p>3. Run <code>make</code> in that directory</p>
+
+<p>4. Start / Restart Tomcat (starttomcat)</p>
+
+<p>5. Open a web browser and navigate to http://ug&lt;#&gt;.cs.ualberta.ca:&lt;first port number&gt;/cmput391project/login.jsp</p>
+
+<p>a. You can obtain your workstation number by typing <code>hostname</code> into the terminal</p>
+
+<h1><a name="_Login_Module:"></a>Login Module:</h1>
+
+<h2>Overview: </h2>
+
+<p>The login module is the entry point for the site and allows a user to authenticate in order to use all features they are authorized for.</p>
+
+<h2><a name="_User_Management:"></a>Login Page:</h2>
+
+<p>Accessed via {BASE_URL}/Login.jsp</p>
+
+<p>This page is the entry point for the system. A user can enter a username and password then hit the “sign in” button</p>
+
+<h2>Modify Account:</h2>
+
+<p>Accessed via{BASE_URL}/modifyAccount.jsp</p>
+
+<p>This page can be used to alter account information for the currently signed in user. Click on any column in the table to edit its value. </p>
+
+<h1>User Management:</h1>
+
+<h2>Overview:</h2>
+
+<p>The user management module is accessible only from an administrator account. It can be used to edit and create information about users, persons, and family doctors.</p>
+
+<h2>Edit Pages (Tabs):</h2>
+
+<p>All of the information in the users, persons and family_doctors tables can be edited from the main User Management page. Use the tabs at the top of the page to view the corresponding information. To edit information click on the cell you wish to alter, a popup will allow you to enter a new value. To add a value to the table click on the “add &lt;data item&gt;” button at the bottom of the page.</p>
+
+<h2>Creation:</h2>
+
+<p>The creation pages can all be reached by navigating to the tab corresponding to the information you wish to add and selectin the “add” button at the bottom of the page. </p>
+
+<h3>Users:</h3>
+
+<p>Fill in all fields and click submit.</p>
+
+<p>Persons:</p>
+
+<p>Fill in all fields and click submit. Class must be (a administrator, p patient, d doctor, or r radiologist)</p>
+
+<p>Family Doctor:</p>
+
+<p>Fill in the id for the doctor to be pared with the id of the patient.</p>
+
+<h1><a name="_Report_Generation:"></a>Report Generation:</h1>
+
+<h2>Overview:</h2>
+
+<h1><a name="_Search:"></a>Search:</h1>
+
+<h2>Overview:</h2>
+
+<h1><a name="_Uploading_Module:"></a>Uploading Module:</h1>
+
+<h2>Overview:</h2>
+
+<h1><a name="_Data_Analysis_Module:"></a>Data Analysis Module:</h1>
+
+<h2>Overview:</h2>
