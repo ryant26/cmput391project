@@ -91,7 +91,7 @@
 				    			String id = results.getString(4);
 				    			String dateRegistered = results.getString(5);
 				    			String pClass = results.getString(3);
-				    			String pk = "\"" + id + "\"";
+				    			String pk = "\"'" + username + "'\"";
 				    											%>
 				    				<tr>
 								        <td class="editable" id="username" data-type="text" data-url="SubmitData" data-title="Enter Userame" data-pk=<%out.println(pk);%>><%out.println(username);%></td>
@@ -135,13 +135,11 @@
 				    		query = "SELECT * FROM persons";
 				    		results = null;
 				    		stmt = null;
-				    		int i = 0;
 				    		try{
 				    			stmt = conn.createStatement();
 				    			results = stmt.executeQuery(query);
 
 				    			while(results.next()){ 
-				    			i++;
 				    			String firstname = results.getString(2);
 				    			String lastname = results.getString(3);
 				    			String id = results.getString(1);

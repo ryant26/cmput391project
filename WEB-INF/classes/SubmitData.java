@@ -80,7 +80,7 @@ public class SubmitData extends HttpServlet{
 	}
 
 	private void handleDateRegistered(String pk, String value){
-		String query = buildUsersQuery("date_registered", "to_date('" + value +"', 'YYYY-MM-DD')", pk);
+		String query = "UPDATE users SET date_registered = to_date('" + value +"', 'YYYY-MM-DD') where user_name = " + pk;
 		runQuery(query);
 	}
 
@@ -202,7 +202,7 @@ public class SubmitData extends HttpServlet{
 	}
 
 	private String buildUsersQuery(String field, String value, String pk){
-		return buildQuery("users", field, value, "person_id", pk);
+		return buildQuery("users", field, value, "user_name", pk);
 	}
 
 	private String buildPersonsQuery(String field, String value, String pk){
