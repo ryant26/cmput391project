@@ -73,7 +73,7 @@
                         String query = " SELECT p.last_name, p.first_name, p.address, p.phone, r.test_date " +
                         "FROM persons p, radiology_record r " +
                         "WHERE p.person_id = r.patient_id " +
-                        "AND '" + diagnosis + "' = r.diagnosis " +
+                        "AND r.diagnosis LIKE '%" + diagnosis + "%' " +
                         "AND r.test_date between to_date('" + startDate +"', 'YYYY-MM-DD') " +
                         "AND to_date('" + endDate +"', 'YYYY-MM-DD') " +
                         "ORDER BY p.last_name";
