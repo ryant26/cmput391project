@@ -23,6 +23,20 @@
     <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
     <script src="../../assets/js/ie-emulation-modes-warning.js"></script>
     <script src="./dist/js/bootstrap.min.js"></script>
+    <nav class="navbar navbar-default">
+      <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+          <a class="navbar-brand" href="menu.jsp">Home</a>
+        </div>
+
+        <ul class="nav navbar-nav navbar-right">
+            <li><a href="help.html">Help</a></li>
+            <li><a href="Logout">Log out</a></li>
+          </ul>
+        
+      </div><!-- /.container-fluid -->
+    </nav>
     <div class="page-header">
       <h1>Report Module</h1>
     </div>
