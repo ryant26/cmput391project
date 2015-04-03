@@ -47,7 +47,7 @@
                     <%  } %>
                     
                     <a href="#" class="list-group-item">Search Module</a>
-                    <a href="#" class="list-group-item">Modify Account</a>        
+                    <a href="modifyAccount.jsp" class="list-group-item">Modify Account</a>        
                     <a href="Logout" class="list-group-item">Log out</a>        
                     
              <% } catch (NullPointerException e){
