@@ -112,7 +112,7 @@
           
 	%>
 
-    <form name=queryData method=post action=testSearch.jsp> 
+    <form name=queryData method=post action=searchModule.jsp> 
 
       <!--Every time you add or update data you need to update the index. <br>
       <input type=submit name="updateIndex" value="Update Index">
@@ -277,9 +277,9 @@
 						while (rset_images != null && rset_images.next()) {
 							image_id = (rset_images.getObject(1)).toString();
 							// specify the servlet when thumbnail is clicked
-							out.println("<a href=\"/proj1/GetOnePic?regular" + image_id + "\" target=" + "_blank" + ">");
+							out.println("<a href=\"/cmput391project/GetOnePic?regular" + image_id + "\" target=" + "_blank" + ">");
 							// display the thumbnail
-							out.println("<img src=\"/proj1/GetOnePic?thumbnail" + image_id + "\"></a>");
+							out.println("<img src=\"/cmput391project/GetOnePic?thumbnail" + image_id + "\"></a>");
 						}
 						out.println("</td>");
 						rset_images.close();

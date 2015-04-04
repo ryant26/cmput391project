@@ -40,13 +40,13 @@
 
                         <a href="userManagement.jsp" class="list-group-item">User Managment</a>
                         <a href="report.jsp" class="list-group-item">Report Generation</a>
-                        <a href="#" class="list-group-item">Data Analysis</a>
+                        <a href="OLAP.jsp" class="list-group-item">Data Analysis</a>
                     
                     <%} else if (userClass.equals("r")){ %>
                         <a href="#" class="list-group-item">Upload Image</a>
                     <%  } %>
                     
-                    <a href="#" class="list-group-item">Search Module</a>
+                    <a href="searchModule.jsp" class="list-group-item">Search Module</a>
                     <a href="modifyAccount.jsp" class="list-group-item">Modify Account</a>        
                     <a href="Logout" class="list-group-item">Log out</a>        
                     
