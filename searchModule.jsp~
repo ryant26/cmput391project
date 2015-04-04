@@ -278,7 +278,7 @@
 				
 				doSearch = m_con.createStatement();
     			ResultSet rset2 = doSearch.executeQuery(searchStr1 + searchStr2 + searchStr3);
-				out.println("<table class = \"table table-bordered\">");
+				out.println("<table class = "table table-bordered">");
 				out.println("<tr>");
 				out.println("<th>Patient Name</th>");
 				out.println("<th>Diagnosis</th>");

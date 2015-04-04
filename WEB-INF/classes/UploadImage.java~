@@ -90,7 +90,7 @@ public class UploadImage extends HttpServlet {
  
         // Connect to the database and create a statement
         Database db = new Database();
-	    Connection conn = db.getConnection();
+	    Conenction conn = db.getConnection();
 	    Statement stmt = conn.createStatement();
 	    
 	    /*

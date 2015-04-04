@@ -129,7 +129,6 @@
 						<input type=text name=desc>
 					</td>
 	  			<tr>
-				<br>
 					<td>Enter Existing Radiology Record ID: </td>
 					<td>
 						<input type=text name=rec_id>
