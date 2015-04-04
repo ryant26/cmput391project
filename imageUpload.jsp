@@ -117,17 +117,17 @@
 				String rec_id = request.getParameter("rec_id");
 
 				if (request.getParameter("newRadioRec") != null) {
-					String newRRec = "insert into radiology_record values (" + request.getParameter("newrec_id") + "," + request.getParameter("pat_id") + "," + request.getParameter("doc_id") + "," + session.getAttribute("p_id") + ", '" + request.getParameter("type") + " ', to_date( '" + request.getParameter("presdate") + " ', 'MM/DD/YYYY ') ,to_date( '" + request.getParameter("testdate") + " ', 'MM/DD/YYYY '), '" + request.getParameter("diag") + " ', '" + request.getParameter("desc") + " ')";
+					String newRRec = "insert into radiology_record values (" + request.getParameter("newrec_id") + "," + request.getParameter("pat_id") + "," + request.getParameter("doc_id") + "," + session.getAttribute("p_id") + ", '" + request.getParameter("type") + " ', to_date( '" + request.getParameter("presdate") + " ', 'YYYY-MM-DD ') ,to_date( '" + request.getParameter("testdate") + " ', 'YYYY-MM-DD '), '" + request.getParameter("diag") + " ', '" + request.getParameter("desc") + " ')";
 
 					Statement doNewRRec = m_con.createStatement();
 					doNewRRec.executeQuery(newRRec);
 
-					out.println(newRRec);
+					//out.println(newRRec);
 					rec_id = request.getParameter("newrec_id");
 				}
 
 				if (!(rec_id.equals(""))) { 
-					String RRecStr1 = "SELECT record_id from radiology_record where record_id = " + rec_id;
+					String RRecStr1 = "SELECT record_id from radiology_record where record_id = " + rec_id + " and radiologist_id = " + session.getAttribute("p_id");
 				
 					doRRec = m_con.createStatement();
 					ResultSet rset = doRRec.executeQuery(RRecStr1);
@@ -156,6 +156,7 @@
 			}	else {
 					 out.println("<br>Please enter a radiology record ID to begin image upload.");
 			}
+			db.close();
 		%>
 </body> 
 </html>

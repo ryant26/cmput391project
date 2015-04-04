@@ -47,30 +47,6 @@
     <%
 		String selectString = "select radiology_record.record_id, (first_name || ' ' || last_name) patient_name, doctor_id, radiologist_id, test_type, prescribing_date, test_date, diagnosis, description from radiology_record join persons on person_id = patient_id";
 
-  		/*String m_url = "jdbc:oracle:thin:@gwynne.cs.ualberta.ca:1521:CRS";
-		String m_driverName = "oracle.jdbc.driver.OracleDriver";
-      
-		String m_userName = "aayao"; //supply username
-		String m_password = "FGThjklzEX_16"; //supply password
-
-		Connection m_con;
-		
-
-		Statement stmt;
-      
-		try {
-      
-			Class drvClass = Class.forName(m_driverName);
-			DriverManager.registerDriver((Driver)
-			drvClass.newInstance());
-			m_con = DriverManager.getConnection(m_url, m_userName, m_password);
-        
-		} catch(Exception e) {      
-			out.print("Error displaying data: ");
-			out.println(e.getMessage());
-			return;
-		}*/
-
 		//use this for final submission
 		Database db = new Database();
 		Connection m_con = db.getConnection();
@@ -134,15 +110,17 @@
 					while (rset_images != null && rset_images.next()) {
 						image_id = (rset_images.getObject(1)).toString();
 						// specify the servlet when thumbnail is clicked
-						out.println("<a href=\"/proj1/GetOnePic?regular" + image_id + "\" target=" + "_blank" + ">");
+						out.println("<a href=\"/cmput391project/GetOnePic?regular" + image_id + "\" target=" + "_blank" + ">");
 						// display the thumbnail
-						out.println("<img src=\"/proj1/GetOnePic?thumbnail" + image_id + "\"></a>");
+						out.println("<img src=\"/cmput391project1/GetOnePic?thumbnail" + image_id + "\"></a>");
 					}
 					out.println("</td>");
 					rset_images.close();
 				
 				} catch (Exception e) {
 					out.println(e.getMessage());
+				} finally {
+					db.close();
 				}
 				out.println("</tr>"); 
         	} 
@@ -194,19 +172,12 @@
 			String startdate, enddate, keyword;
 			boolean hasDate = false;
 			boolean hasKeyword = false;
+			boolean hasSecurity = false;
 		
 			//default search string
 			String searchStr1 = "SELECT ";
 			String searchStr2 = "diagnosis, description, (first_name || ' ' || last_name) patient_name, test_date, record_id FROM radiology_record join persons on person_id = patient_id WHERE ";
 			String searchStr3 = " order by rank desc";
-          	
-			//d for doctor, p for patient?
-			/*if ((((String) session.getAttribute("class")).equals("d"))){
-				searchStr2 += session.getAttribute("person_id") + "= doctor_id, ";
-			} else if ((((String) session.getAttribute("class")).equals("p"))) {
-				searchStr2 += session.getAttribute("person_id") + "= patient_id, ";
-			}*/	
-
 
 			if(!((startdate = request.getParameter("startdate")).equals(""))) {
 		  		out.println("<br>");
@@ -233,6 +204,26 @@
 		  		hasKeyword = true;		  
             }
 
+			if ((((String) session.getAttribute("class")).equals("d"))){
+				hasSecurity = true;
+				searchStr2 += "doctor_id = " + session.getAttribute("p_id");
+				if (hasKeyword) {
+					searchStr2 += " and (";
+				}
+			} else if ((((String) session.getAttribute("class")).equals("p"))) {
+				hasSecurity = true;
+				searchStr2 += "patient_id = " + session.getAttribute("p_id");
+				if (hasKeyword) {
+					searchStr2 += " and (";
+				}
+			} else if ((((String) session.getAttribute("class")).equals("r"))) {
+				hasSecurity = true;
+				searchStr2 += "radiologist_id = " + session.getAttribute("p_id");
+				if (hasKeyword) {
+					searchStr2 += " and (";
+				}
+			}
+
 			if (hasDate) {
 				searchStr2 += "to_char(test_date, 'YYYY-MM-DD') >= '" + startdate + "' and to_char(test_date, 'YYYY-MM-DD') <= '" + enddate + "'";
 				if (hasKeyword) {
@@ -257,6 +248,9 @@
 				}
 
 				searchStr1 += ")rank, ";
+				if (hasSecurity) {
+					searchStr2 += ") ";
+				}
 				if (hasDate) {
 					searchStr2 += ") ";
 				}

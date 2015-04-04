@@ -54,27 +54,6 @@
 		%>
 
 		<%
-  		/*String m_url = "jdbc:oracle:thin:@gwynne.cs.ualberta.ca:1521:CRS";
-		String m_driverName = "oracle.jdbc.driver.OracleDriver";
-      
-		String m_userName = "aayao"; //supply username
-		String m_password = "FGThjklzEX_16"; //supply password
-
-		Connection m_con;
-      
-		try {
-      
-			Class drvClass = Class.forName(m_driverName);
-			DriverManager.registerDriver((Driver)
-			drvClass.newInstance());
-			m_con = DriverManager.getConnection(m_url, m_userName, m_password);
-        
-		} catch(Exception e) {      
-			out.print("Error displaying data: ");
-			out.println(e.getMessage());
-			return;
-		} */
-
 		//use this for final submission
 		Database db = new Database();
 		Connection m_con = db.getConnection();
@@ -266,7 +245,7 @@
 				}
 				out.println("</table>");
 			}
-
+			db.close();
 		%>
 	
     </BODY> 

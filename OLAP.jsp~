@@ -17,7 +17,7 @@
     <link href="./dist/css/bootstrap-theme.min.css" rel="stylesheet">
 
     <!-- Custom styles for this template -->
-    <link href="./resc/report.css" rel="stylesheet">
+    <link href="./resc/olap.css" rel="stylesheet">
 
     <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
     <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
@@ -44,13 +44,13 @@
     <BODY> 
 		<%
 			//only admin can use
-			/*try{
+			try{
 				if (!(((String) session.getAttribute("class")).equals("a"))){
 					throw new Exception();
 				}
 			} catch (Exception e){
 				response.sendError(HttpServletResponse.SC_FORBIDDEN);
-			}*/
+			}
 		%>
 
 		<%
@@ -80,45 +80,63 @@
 		Connection m_con = db.getConnection();
           
 	%>
-
-	<form name=queryData method=post action=OLAP.jsp> 
-		<table>
-			<p> Data Analysis Module
-				<br>
-				Display # of images for: 
-			</p>
-			<tr>
-	  			<tr>
-					<td>Patient</td>
-					<td>
-						<input type="checkbox" name="patient" value="Y">
-					</td>
-					<td>Test Type</td>
-					<td>
-						<input type="checkbox" name="testtype" value="Y">
-					</td>
-				</tr>
-				<tr>
-					<td>Start Date (YYYY-MM-DD)</td>
-					<td>
-						<input type=text name=startdate>
-					</td>
-					<td>End Date (YYYY-MM-DD)</td>
-					<td>
-						<input type=text name=enddate>
-					</td>
-				</tr>
-				<tr>
-					<td>Time Block</td>
-					<td><input type="radio" name="timeHeir" value="1" checked> Weekly</td>
-					<td><input type="radio" name="timeHeir" value="2"> Monthly</td>
-					<td><input type="radio" name="timeHeir" value="3"> Yearly</td>
-				</tr>	
-				<td>
-					<input type=submit value="Submit" name="OLAP">
-				</td>
-			</tr>
-		</table>
+	<div class="panel panel-default">
+          <div class="panel-heading">
+            <h3 class="panel-title">Display # of images for:</h3>
+          </div>
+          <div class="panel-body">
+            <form class="form-search form-horizontal" name="queryData" method="post" action="OLAP.jsp">
+                <div class="form-group form-inline">
+                 <div class="col-sm-offset-1 col-sm-10">
+			      <div class="checkbox">
+			        <label>
+			          <input type="checkbox" name="patient" value="Y"> Patient
+			        </label>
+			      </div>
+			      <div class="checkbox check-padded">
+			        <label>
+			          <input type="checkbox" name="testtype" value="Y"> Test Type
+			        </label>
+			      </div>
+            	</div>
+            	</div>
+                <div class="form-group">
+                    <label class="col-sm-1 control-label" for="start-date">Start:</label>
+                    <div class="col-sm-11">
+                    	<input type="date" id="start-date" name="startdate" class="form-control date-field" placeholder="Start Date">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-1 control-label" for="end-date">End:</label>
+                    <div class="col-sm-11">
+                    	<input type="date" id="end-date" name="enddate" class="form-control date-field" placeholder="Start Date">
+                    </div>
+                </div>
+                <div class="form-group form-inline">
+                 <div class="col-sm-offset-1 col-sm-10">
+			      <div class="radio">
+			        <label>
+			          <input type="radio" name="timeHeir" value="1" checked> Weekly
+			        </label>
+			      </div>
+			      <div class="radio check-padded">
+			        <label>
+			          <input type="radio" name="timeHeir" value="2"> Monthly
+			        </label>
+			      </div>
+			      <div class="radio check-padded">
+			        <label>
+			          <input type="radio" name="timeHeir" value="3"> Yearly
+			        </label>
+			      </div>
+            	</div>
+            	</div>
+                <div class="col-sm-offset-1 col-sm-11">
+                	<button name="OLAP" type="submit" value="Submit" class="btn btn-primary">Submit</button>
+              	</div>
+            </form>
+          </div>
+        </div>
 		<%
 			if (request.getParameter("OLAP") != null) {
 				Statement doOLAP;
@@ -248,8 +266,8 @@
 				}
 				out.println("</table>");
 			}
-
+			db.close();
 		%>
-	</form>
+	
     </BODY> 
 </HTML> 
