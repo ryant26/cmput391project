@@ -1,4 +1,4 @@
-<%@ page import="java.sql.*, java.util.*" %>
+<%@ page import="java.sql.*, java.util.*, db.Database" %>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 	<head>
@@ -164,11 +164,11 @@
 			String searchStr3 = " order by rank desc";
           	
 			//d for doctor, p for patient?
-			if ((((String) session.getAttribute("class")).equals("d"))){
+			/*if ((((String) session.getAttribute("class")).equals("d"))){
 				searchStr2 += session.getAttribute("person_id") + "= doctor_id, ";
 			} else if ((((String) session.getAttribute("class")).equals("p"))) {
 				searchStr2 += session.getAttribute("person_id") + "= patient_id, ";
-			}		
+			}*/	
 
 
 			if(!((startdate = request.getParameter("startdate")).equals(""))) {

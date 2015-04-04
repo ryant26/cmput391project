@@ -4,4 +4,37 @@
  http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd"
 	version="2.4">
 
+	<servlet>
+		<servlet-name>SubmitData</servlet-name>
+		<servlet-class>SubmitData</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>SubmitData</servlet-name>
+		<url-pattern>/SubmitData</url-pattern>
+	</servlet-mapping>
+    <servlet>
+        <servlet-name>GetOnePic</servlet-name>
+        <servlet-class>GetOnePic</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>GetOnePic</servlet-name>
+        <url-pattern>/GetOnePic</url-pattern>
+    </servlet-mapping>
+    <servlet>
+		<servlet-name>AddNewEntries</servlet-name>
+		<servlet-class>AddNewEntries</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>AddNewEntries</servlet-name>
+		<url-pattern>/AddNewEntries</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<servlet-name>Logout</servlet-name>
+		<servlet-class>Logout</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>Logout</servlet-name>
+		<url-pattern>/Logout</url-pattern>
+	</servlet-mapping>
+
 </web-app>
