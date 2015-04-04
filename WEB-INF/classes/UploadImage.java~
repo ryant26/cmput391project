@@ -62,10 +62,6 @@ public class UploadImage extends HttpServlet {
     public void doPost(HttpServletRequest request,HttpServletResponse response)
 	throws ServletException, IOException {
 	//  change the following parameters to connect to the oracle database
-	String username = "aayao";
-	String password = "FGThjklzEX_16";
-	String drivername = "oracle.jdbc.driver.OracleDriver";
-	String dbstring ="jdbc:oracle:thin:@gwynne.cs.ualberta.ca:1521:CRS";
 	int pic_id;
 
 	try {
@@ -77,6 +73,7 @@ public class UploadImage extends HttpServlet {
 	    // Process the uploaded items, assuming only 1 image file uploaded
 	    Iterator i = FileItems.iterator();
 	    FileItem item = (FileItem) i.next();
+
 	    while (i.hasNext() && item.isFormField()) {
 			rec_id = item.getString();
 			item = (FileItem) i.next();
@@ -90,7 +87,7 @@ public class UploadImage extends HttpServlet {
  
         // Connect to the database and create a statement
         Database db = new Database();
-	    Conenction conn = db.getConnection();
+	    Connection conn = db.getConnection();
 	    Statement stmt = conn.createStatement();
 	    
 	    /*
@@ -154,6 +151,8 @@ public class UploadImage extends HttpServlet {
 		    "<H1>" +
 		            response_message +
 		    "</H1>\n" +
+			"<form name=queryData method=post action=imageUpload.jsp> " +
+			"<input type=submit value=\"Back\" name=\"\">" +
 		    "</BODY></HTML>");
     }
 

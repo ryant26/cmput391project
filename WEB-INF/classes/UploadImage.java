@@ -65,8 +65,6 @@ public class UploadImage extends HttpServlet {
 	int pic_id;
 
 	try {
-		System.out.println("1...");
-	
 		String rec_id = "";
 	    //Parse the HTTP request to get the image stream
 	    DiskFileUpload fu = new DiskFileUpload();
@@ -76,14 +74,10 @@ public class UploadImage extends HttpServlet {
 	    Iterator i = FileItems.iterator();
 	    FileItem item = (FileItem) i.next();
 
-		System.out.println("2...");
-
 	    while (i.hasNext() && item.isFormField()) {
 			rec_id = item.getString();
 			item = (FileItem) i.next();
 	    }
-		System.out.println("Printing...");
-		System.out.println("INSERT INTO pacs_images VALUES("+rec_id+")");
 
 	    //Get the image stream
 	    InputStream instream = item.getInputStream();

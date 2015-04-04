@@ -140,11 +140,8 @@
 
 						<form name= "upload-image" method= "POST" enctype= "multipart/form-data" action="UploadImage">
 						<table>
-						<%out.println("<td><input name=\"rec_id\" type=\"hidden\" value=\"" + rec_id + "\" ></td>");%>
-						<div class="form-group">
-							<input type="file" id="exampleInputFile" name= "file-path" type= "file" size= "30">
-						</div>
-						
+						<%out.println("<td><input name=\"rec_id\" type=\"hidden\" value=\"" + rec_id + "\" ></td>");
+						out.println("<td><input name=\"file-path\" type=\"file\" size=\"30\" ></td>");%>
 						<tr>
 						<td>
 						<button name=".submit" type="submit" class="btn btn-primary">Upload</button>
