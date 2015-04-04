@@ -135,37 +135,41 @@ declare
   job number;
 begin
   dbms_job.submit(job, 'ctx_ddl.sync_index(''myindex1'');',
-                  1=>'SYSDATE+&interval/1440');
+                  interval=>'SYSDATE+1/1440');
   commit;
   dbms_output.put_line('job '||job||' has been submitted.');
 end;
+/
 
 set serveroutput on
 declare
   job number;
 begin
   dbms_job.submit(job, 'ctx_ddl.sync_index(''myindex2'');',
-                  1=>'SYSDATE+&interval/1440');
+                  interval=>'SYSDATE+1/1440');
   commit;
   dbms_output.put_line('job '||job||' has been submitted.');
 end;
+/
 
 set serveroutput on
 declare
   job number;
 begin
   dbms_job.submit(job, 'ctx_ddl.sync_index(''myindex3'');',
-                  1=>'SYSDATE+&interval/1440');
+                  interval=>'SYSDATE+1/1440');
   commit;
   dbms_output.put_line('job '||job||' has been submitted.');
 end;
+/
 
 set serveroutput on
 declare
   job number;
 begin
   dbms_job.submit(job, 'ctx_ddl.sync_index(''myindex4'');',
-                  1=>'SYSDATE+&interval/1440');
+                  interval=>'SYSDATE+1/1440');
   commit;
   dbms_output.put_line('job '||job||' has been submitted.');
 end;
+/
