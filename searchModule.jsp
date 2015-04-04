@@ -160,35 +160,33 @@
     	<br>
     -->
     
-	<table>
-		<tr>
-  			<tr>
-				<td>Keyword</td>
-				<td>
-					<input type=text name=keyword>
-				</td>
-			</tr>
-			<tr>
-				<td>Start Date (YYYY-MM-DD)</td>
-				<td>
-					<input type=text name=startdate>
-				</td>
-				<td>End Date (YYYY-MM-DD)</td>
-				<td>
-					<input type=text name=enddate>
-				</td>
-			</tr>
-			<tr>
-				<td>Order by date?</td>
-				<td>
-					<input type="checkbox" name="order" value="Y">
-				</td>
-			</tr>
-			<td>
-				<input type=submit value="Search" name="search">
-			</td>
-		</tr>
-	</table>
+	
+	<div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">Search Area</h3>
+      </div>
+      <div class="panel-body">
+        <form class="form-search form-inline">
+            <div class="form-group">
+                <input type="text" id="diagnosis" name="keyword" class="form-control diagnosis-field" placeholder="Keyword">
+            </div>
+            <div class="form-group">
+                <label for="start-date">Start:</label>
+                <input type="date" id="start-date" name="startdate" class="form-control date-field" placeholder="Start Date">
+            </div>
+            <div class="form-group">
+                <label for="end-date">End:</label>
+                <input type="date" id="end-date" name="enddate" class="form-control date-field" placeholder="Start Date">
+            </div>
+             <div class="checkbox">
+				<label>
+				  <input type="checkbox" name="order" value="Y"> Order By Date
+				</label>
+			</div>
+            <button name="search" type="submit" value="Search" class="btn btn-primary">Search</button>
+        </form>
+      </div>
+    </div>
       
 	<%
 		if (request.getParameter("search") != null) {
