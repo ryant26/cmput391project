@@ -123,6 +123,8 @@ INSERT INTO family_doctor values(4, 1);
 
 INSERT INTO family_doctor values(4, 3);
 
+CREATE SEQUENCE pic_id_sequence;
+
 CREATE INDEX myindex1 ON persons(last_name) INDEXTYPE IS CTXSYS.CONTEXT;
 CREATE INDEX myindex2 ON persons(first_name) INDEXTYPE IS CTXSYS.CONTEXT;
 CREATE INDEX myindex3 ON radiology_record(diagnosis) INDEXTYPE IS CTXSYS.CONTEXT;

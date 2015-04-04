@@ -91,7 +91,7 @@
 					<tr>
 					<td>Record ID: </td>					
 					<td>
-						<input type=text name=rec_id>
+						<input type=text name=newrec_id>
 					</td>
 					<td>Patient ID: </td>
 					<td>
@@ -100,13 +100,12 @@
 					<td>Doctor ID: </td>
 					<td>
 						<input type=text name=doc_id>
-					</td>
+					</td>			
 					</tr>
-
 					<tr>
 					<td>Test Type: </td>
 					<td>
-						<input type=text name=type_id>
+						<input type=text name=type>
 					</td>
 					<td>Prescribing Date: </td>
 					<td>
@@ -116,37 +115,57 @@
 					<td>Test Date: </td>
 					<td>
 						
-						<input type=text name=presdate>
+						<input type=text name=testdate>
 					</td>
 					</tr>
 
 					<td>Diagnosis: </td>
 					<td>
-						<input type=text name= diag>
+						<input type=text name=diag>
 					</td>
 					<td>Description: </td>
 					<td>
 						<input type=text name=desc>
 					</td>
-	  			<tr>
-				<br>
-					<td>Enter Existing Radiology Record ID: </td>
-					<td>
-						<input type=text name=rec_id>
-					</td>
-				</tr>
-					<td>
-						<input type=submit value="Submit" name="radioRec">
-					</td>
-				</tr>
+					<tr>
+						<td>
+							<input type=submit value="Submit" name="newRadioRec">
+						</td>
+					</tr>				
+				</tr>				
+		</table>
+
+		<br>
+		Or:
+		<br>
+
+		<table>
+			<td>Enter Existing Radiology Record ID: </td>
+				<td>
+					<input type=text name=rec_id>
+				</td>
+
+				<td>
+					<input type=submit value="Submit" name="radioRec">
+				</td>
 		</table>
 	</form>
 		<%
-			if (request.getParameter("radioRec") != null) {
+			if (request.getParameter("radioRec") != null || request.getParameter("newRadioRec") != null) {
 				Statement doRRec;
-				String rec_id;
+				String rec_id = request.getParameter("rec_id");
 
-				if (!(rec_id=request.getParameter("rec_id")).equals("")) { 
+				if (request.getParameter("newRadioRec") != null) {
+					String newRRec = "insert into radiology_record values (" + request.getParameter("newrec_id") + "," + request.getParameter("pat_id") + "," + request.getParameter("doc_id") + "," + session.getAttribute("p_id") + ",\'" + request.getParameter("type") + "\', to_date(\'" + request.getParameter("presdate") + "\',\'YYYY/MM/DD\') ,to_date(\'" + request.getParameter("testdate") + "\',\'YYYY/MM/DD\'),\'" + request.getParameter("diag") + "\',\'" + request.getParameter("desc") + "\')";
+
+					Statement doNewRRec = m_con.createStatement();
+					doNewRRec.executeQuery(newRRec);
+
+					out.println(newRRec);
+					rec_id = request.getParameter("newrec_id");
+				}
+
+				if (!(rec_id.equals(""))) { 
 					String RRecStr1 = "SELECT record_id from radiology_record where record_id = " + rec_id;
 				
 					doRRec = m_con.createStatement();
