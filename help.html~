@@ -132,24 +132,20 @@ will be shown.</p>
 <hr>
 <h1 class="western"><a name="5.Uploading Module:|outline"></a>Search:</h1>
 <h2 class="western">Overview:</h2>
-<p>The uploading module is used to upload an image file for a specified radiology record</p>
+<p>The report generation module can be used to find patients with a
+given diagnosis during a given time period.</p>
 <h2 class="western">Usage:</h2>
-<p>To use this module type in the radiology record id and click submit.  Then choose the image you wish to upload by clicking the browse button. Finally, click upload to upload the image for the specified radiology record. </p>
+<p>To use this module simply fill in the diagnosis field and select a
+starting and ending date. Click on the search button and the results
+will be shown.</p>
 <hr>
 <h1 class="western"><a name="6.Search:|outline"></a>Uploading
 Module:</h1>
 <h2 class="western">Overview:</h2>
-<p>The search module is used to search for radiology records found in the database</p>
-<h2 class="western">Usage:</h2>
-<p>To use this module type in a keyword or a list of keywords separated by spaces and/or a start date and/or an end date in the text boxes beside the approriate labels. Additionally a checkbox is supplied in which if checked will sort the results by date and then by search term match rather than just search term match. Finally click search to view the results. The results will onl display if at least 1 of the textboxes are filled.</p>
 <hr>
 <h1 class="western"><a name="7.Data Analysis Module:|outline"></a>Data
 Analysis Module:</h1>
 <h2 class="western">Overview:</h2>
-<p>The data analysis module is used to generate an OLAP report based on the values of patient name, test type, and/or a period of time</p>
-<h2 class="western">Usage:</h2>
-<p>To use this module select patient and/or test type if these fields are required. And optionally a time period. Then select whether weekly, monthly, or yearly results are desired. Finally click submit to view the report in the form of a table.</p>
-<hr>
 <hr>
 </body>
 </html>
