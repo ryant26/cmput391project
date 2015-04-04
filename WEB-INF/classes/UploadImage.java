@@ -134,7 +134,7 @@ public class UploadImage extends HttpServlet {
         stmt.executeUpdate("commit");
 	    response_message = " Upload OK!  ";
         conn.close();
-
+		db.close();
 	} catch( Exception ex ) {
 	    //System.out.println( ex.getMessage());
 	    response_message = ex.getMessage();
