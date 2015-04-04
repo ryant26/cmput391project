@@ -154,6 +154,8 @@ public class UploadImage extends HttpServlet {
 		    "<H1>" +
 		            response_message +
 		    "</H1>\n" +
+			"<form name=queryData method=post action=imageUpload.jsp> " +
+			"<input type=submit value=\"Back\" name=\"\">" +
 		    "</BODY></HTML>");
     }
 
